@@ -1,0 +1,33 @@
+{
+  "": {
+    "swift-dependencies": "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/master.swiftdeps"
+  },
+  "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Tests/BioMotionProTests.swift": {
+    "dependencies": "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/BioMotionProTests.d",
+    "object": "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/BioMotionProTests.swift.o",
+    "swiftmodule": "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/BioMotionProTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/BioMotionProTests.swiftdeps",
+    "diagnostics": "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/BioMotionProTests.dia"
+  },
+  "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Tests/MathTests.swift": {
+    "dependencies": "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/MathTests.d",
+    "object": "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/MathTests.swift.o",
+    "swiftmodule": "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/MathTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/MathTests.swiftdeps",
+    "diagnostics": "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/MathTests.dia"
+  },
+  "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Tests/PerformanceTests.swift": {
+    "dependencies": "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/PerformanceTests.d",
+    "object": "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/PerformanceTests.swift.o",
+    "swiftmodule": "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/PerformanceTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/PerformanceTests.swiftdeps",
+    "diagnostics": "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/PerformanceTests.dia"
+  },
+  "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Tests/SkeletonTests.swift": {
+    "dependencies": "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/SkeletonTests.d",
+    "object": "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/SkeletonTests.swift.o",
+    "swiftmodule": "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/SkeletonTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/SkeletonTests.swiftdeps",
+    "diagnostics": "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/SkeletonTests.dia"
+  }
+}

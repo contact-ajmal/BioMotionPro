@@ -1,0 +1,16 @@
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/App/BioMotionProApp.swift
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/App/MainWindow.swift
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/Compute/BiomechanicsEngine.swift
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/C3DParser.swift
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataExporter.swift
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataModels.swift
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/OpenSimParsers.swift
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/BatchProcessingView.swift
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Inspector/DataInspectorView.swift
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Panels/DataEditorView.swift
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Panels/SignalPlotsView.swift
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Theme/AppTheme.swift
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Timeline/TimelineView.swift
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/VideoPlayerView.swift
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/Visualization/Scene3DView.swift
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/Visualization/SkeletonModel.swift

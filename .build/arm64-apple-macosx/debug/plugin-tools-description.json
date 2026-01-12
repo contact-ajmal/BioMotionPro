@@ -1,0 +1,1068 @@
+{
+  "builtTestProducts" : [
+    {
+      "binaryPath" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProPackageTests.xctest/Contents/MacOS/BioMotionProPackageTests",
+      "packagePath" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro",
+      "productName" : "BioMotionProPackageTests"
+    }
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.BioMotionPro-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/sources",
+      "importPath" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/App/BioMotionProApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/App/MainWindow.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/Compute/BiomechanicsEngine.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/C3DParser.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataExporter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataModels.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/OpenSimParsers.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/BatchProcessingView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Inspector/DataInspectorView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Panels/DataEditorView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Panels/SignalPlotsView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Theme/AppTheme.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Timeline/TimelineView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/VideoPlayerView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/Visualization/Scene3DView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/Visualization/SkeletonModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/sources"
+        }
+      ],
+      "isLibrary" : false,
+      "moduleName" : "BioMotionPro",
+      "moduleOutputPath" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/Modules/BioMotionPro.swiftmodule",
+      "objects" : [
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/BioMotionProApp.swift.o",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/MainWindow.swift.o",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/BiomechanicsEngine.swift.o",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/C3DParser.swift.o",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/DataExporter.swift.o",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/DataModels.swift.o",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/OpenSimParsers.swift.o",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/BatchProcessingView.swift.o",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/DataInspectorView.swift.o",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/DataEditorView.swift.o",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/SignalPlotsView.swift.o",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/AppTheme.swift.o",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/TimelineView.swift.o",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/VideoPlayerView.swift.o",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/Scene3DView.swift.o",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/SkeletonModel.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-Xfrontend",
+        "-entry-point-function-name",
+        "-Xfrontend",
+        "BioMotionPro_main",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "biomotionpro"
+      ],
+      "outputFileMapPath" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/BioMotionProApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/MainWindow.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/BiomechanicsEngine.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/C3DParser.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/DataExporter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/DataModels.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/OpenSimParsers.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/BatchProcessingView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/DataInspectorView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/DataEditorView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/SignalPlotsView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/AppTheme.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/TimelineView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/VideoPlayerView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/Scene3DView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/SkeletonModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/Modules/BioMotionPro.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/App/BioMotionProApp.swift",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/App/MainWindow.swift",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/Compute/BiomechanicsEngine.swift",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/C3DParser.swift",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataExporter.swift",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataModels.swift",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/OpenSimParsers.swift",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/BatchProcessingView.swift",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Inspector/DataInspectorView.swift",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Panels/DataEditorView.swift",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Panels/SignalPlotsView.swift",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Theme/AppTheme.swift",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Timeline/TimelineView.swift",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/VideoPlayerView.swift",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/Visualization/Scene3DView.swift",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/Visualization/SkeletonModel.swift"
+      ],
+      "tempsPath" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.BioMotionProPackageTests-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProPackageTests.build/sources",
+      "importPath" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProPackageTests.derived/runner.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/Modules/BioMotionProTests.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProPackageTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "BioMotionProPackageTests",
+      "moduleOutputPath" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/Modules/BioMotionProPackageTests.swiftmodule",
+      "objects" : [
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProPackageTests.build/runner.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProPackageTests.build/include/BioMotionProPackageTests-Swift.h",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "biomotionpro"
+      ],
+      "outputFileMapPath" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProPackageTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProPackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/Modules/BioMotionProPackageTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProPackageTests.derived/runner.swift"
+      ],
+      "tempsPath" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProPackageTests.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.BioMotionProTests-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/sources",
+      "importPath" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Tests/BioMotionProTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Tests/MathTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Tests/PerformanceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Tests/SkeletonTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "BioMotionProTests",
+      "moduleOutputPath" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/Modules/BioMotionProTests.swiftmodule",
+      "objects" : [
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/BioMotionProTests.swift.o",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/MathTests.swift.o",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/PerformanceTests.swift.o",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/SkeletonTests.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "biomotionpro"
+      ],
+      "outputFileMapPath" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/BioMotionProTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/MathTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/PerformanceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/SkeletonTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/Modules/BioMotionProTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Tests/BioMotionProTests.swift",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Tests/MathTests.swift",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Tests/PerformanceTests.swift",
+        "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Tests/SkeletonTests.swift"
+      ],
+      "tempsPath" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "BioMotionPro" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "BioMotionPro",
+      "-package-name",
+      "biomotionpro",
+      "-c",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/App/BioMotionProApp.swift",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/App/MainWindow.swift",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/Compute/BiomechanicsEngine.swift",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/C3DParser.swift",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataExporter.swift",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataModels.swift",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/OpenSimParsers.swift",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/BatchProcessingView.swift",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Inspector/DataInspectorView.swift",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Panels/DataEditorView.swift",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Panels/SignalPlotsView.swift",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Theme/AppTheme.swift",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Timeline/TimelineView.swift",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/VideoPlayerView.swift",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/Visualization/Scene3DView.swift",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/Visualization/SkeletonModel.swift",
+      "-I",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-Xfrontend",
+      "-entry-point-function-name",
+      "-Xfrontend",
+      "BioMotionPro_main",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "biomotionpro",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "BioMotionProPackageTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "BioMotionProPackageTests",
+      "-package-name",
+      "biomotionpro",
+      "-c",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProPackageTests.derived/runner.swift",
+      "-I",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProPackageTests.build/include/BioMotionProPackageTests-Swift.h",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "biomotionpro",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "BioMotionProTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "BioMotionProTests",
+      "-package-name",
+      "biomotionpro",
+      "-c",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Tests/BioMotionProTests.swift",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Tests/MathTests.swift",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Tests/PerformanceTests.swift",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Tests/SkeletonTests.swift",
+      "-I",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "biomotionpro",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "BioMotionPro" : [
+
+    ],
+    "BioMotionProPackageTests" : [
+      "BioMotionProTests",
+      "BioMotionPro"
+    ],
+    "BioMotionProTests" : [
+      "BioMotionPro"
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+    "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProPackageTests.derived/runner.swift" : {
+      "inputs" : [
+
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProPackageTests.derived/runner.swift"
+        }
+      ]
+    }
+  },
+  "traitConfiguration" : {
+    "default" : {
+
+    }
+  },
+  "writeCommands" : {
+    "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro-entitlement.plist" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<entitlement-plist>"
+        },
+        {
+          "kind" : "virtual",
+          "name" : "<com.apple.security.get-task-allow>"
+        }
+      ],
+      "outputFilePath" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro-entitlement.plist"
+    },
+    "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/App/BioMotionProApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/App/MainWindow.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/Compute/BiomechanicsEngine.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/C3DParser.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataExporter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataModels.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/OpenSimParsers.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/BatchProcessingView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Inspector/DataInspectorView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Panels/DataEditorView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Panels/SignalPlotsView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Theme/AppTheme.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/Timeline/TimelineView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/VideoPlayerView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/Visualization/Scene3DView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/Visualization/SkeletonModel.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/sources"
+    },
+    "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/AppTheme.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/BatchProcessingView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/BioMotionProApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/BiomechanicsEngine.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/C3DParser.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/DataEditorView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/DataExporter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/DataInspectorView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/DataModels.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/MainWindow.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/OpenSimParsers.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/Scene3DView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/SignalPlotsView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/SkeletonModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/TimelineView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/VideoPlayerView.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.product/Objects.LinkFileList"
+    },
+    "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProPackageTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProPackageTests.derived/runner.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProPackageTests.build/sources"
+    },
+    "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProPackageTests.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/AppTheme.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/BatchProcessingView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/BioMotionProApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/BiomechanicsEngine.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/C3DParser.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/DataEditorView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/DataExporter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/DataInspectorView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/DataModels.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/MainWindow.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/OpenSimParsers.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/Scene3DView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/SignalPlotsView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/SkeletonModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/TimelineView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionPro.build/VideoPlayerView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProPackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/BioMotionProTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/MathTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/PerformanceTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/SkeletonTests.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProPackageTests.product/Objects.LinkFileList"
+    },
+    "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Tests/BioMotionProTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Tests/MathTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Tests/PerformanceTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Tests/SkeletonTests.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/BioMotionProTests.build/sources"
+    },
+    "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+    }
+  }
+}

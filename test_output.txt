@@ -1,0 +1,292 @@
+warning: 'biomotionpro': found 1 file(s) which are unhandled; explicitly declare them as resources or exclude from the target
+    /Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/Visualization/Shaders.metal
+[0/1] Planning build
+Building for debugging...
+[0/6] Write swift-version--58304C5D6DBC2206.txt
+[2/14] Compiling BioMotionPro BatchProcessingView.swift
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/BatchProcessingView.swift:3:8: error: invalid redeclaration of 'BatchProcessingView'
+  1 | import SwiftUI
+  2 | 
+  3 | struct BatchProcessingView: View {
+    |        `- error: invalid redeclaration of 'BatchProcessingView'
+  4 |     @EnvironmentObject var appState: AppState
+  5 |     @Environment(\.dismiss) var dismiss
+[3/15] Compiling BioMotionPro OpenSimParsers.swift
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/OpenSimParsers.swift:223:13: warning: variable 'nRows' was written to, but never read
+221 |         var columnLabels: [String] = []
+222 |         var dataRows: [[Float]] = []
+223 |         var nRows = 0
+    |             `- warning: variable 'nRows' was written to, but never read
+224 |         var nColumns = 0
+225 |         
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/OpenSimParsers.swift:224:13: warning: variable 'nColumns' was written to, but never read
+222 |         var dataRows: [[Float]] = []
+223 |         var nRows = 0
+224 |         var nColumns = 0
+    |             `- warning: variable 'nColumns' was written to, but never read
+225 |         
+226 |         for line in lines {
+[4/15] Compiling BioMotionPro VideoPlayerView.swift
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/VideoPlayerView.swift:4:8: error: invalid redeclaration of 'VideoPlayerView'
+ 2 | import AVKit
+ 3 | 
+ 4 | struct VideoPlayerView: View {
+   |        `- error: invalid redeclaration of 'VideoPlayerView'
+ 5 |     @EnvironmentObject var appState: AppState
+ 6 |     @State private var player: AVPlayer?
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/VideoPlayerView.swift:17:22: warning: 'onChange(of:perform:)' was deprecated in macOS 14.0: Use `onChange` with a two or zero parameter action closure instead. [#DeprecatedDeclaration]
+15 |                         // This uses a polling or notification approach in a real app
+16 |                     }
+17 |                     .onChange(of: appState.currentFrame) { newFrame in
+   |                      `- warning: 'onChange(of:perform:)' was deprecated in macOS 14.0: Use `onChange` with a two or zero parameter action closure instead. [#DeprecatedDeclaration]
+18 |                          syncVideoToFrame(frame: newFrame)
+19 |                     }
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/UI/VideoPlayerView.swift:20:22: warning: 'onChange(of:perform:)' was deprecated in macOS 14.0: Use `onChange` with a two or zero parameter action closure instead. [#DeprecatedDeclaration]
+18 |                          syncVideoToFrame(frame: newFrame)
+19 |                     }
+20 |                     .onChange(of: appState.isPlaying) { isPlaying in
+   |                      `- warning: 'onChange(of:perform:)' was deprecated in macOS 14.0: Use `onChange` with a two or zero parameter action closure instead. [#DeprecatedDeclaration]
+21 |                         if isPlaying {
+22 |                             player.play()
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+[5/15] Compiling BioMotionPro TimelineView.swift
+[6/15] Compiling BioMotionPro DataModels.swift
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataModels.swift:338:17: error: invalid redeclaration of 'withFilledGaps(maxGapSize:)'
+336 | extension MarkerData {
+337 |     /// Fill gaps in marker data using linear interpolation
+338 |     public func withFilledGaps(maxGapSize: Int = 10) -> MarkerData {
+    |                 `- error: invalid redeclaration of 'withFilledGaps(maxGapSize:)'
+339 |         var filledPositions = self.positions
+340 |         
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataModels.swift:385:15: error: invalid redeclaration of 'DataExporter'
+383 | 
+384 | /// Export motion capture data to various formats
+385 | public struct DataExporter {
+    |               `- error: invalid redeclaration of 'DataExporter'
+386 |     
+387 |     // MARK: - CSV Export
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataModels.swift:461:15: error: invalid redeclaration of 'ReportGenerator'
+459 | }
+460 | 
+461 | public struct ReportGenerator {
+    |               `- error: invalid redeclaration of 'ReportGenerator'
+462 |     
+463 |     /// Generate HTML report for capture
+[7/15] Compiling BioMotionPro MainWindow.swift
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/App/MainWindow.swift:283:8: error: invalid redeclaration of 'BatchProcessingView'
+281 | // MARK: - Batch Processing
+282 | 
+283 | struct BatchProcessingView: View {
+    |        `- error: invalid redeclaration of 'BatchProcessingView'
+284 |     @EnvironmentObject var appState: AppState
+285 |     @Environment(\.dismiss) var dismiss
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/App/MainWindow.swift:439:8: error: invalid redeclaration of 'VideoPlayerView'
+437 | // MARK: - Video Player
+438 | 
+439 | struct VideoPlayerView: View {
+    |        `- error: invalid redeclaration of 'VideoPlayerView'
+440 |     @EnvironmentObject var appState: AppState
+441 |     @State private var player: AVPlayer?
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/App/MainWindow.swift:173:17: warning: no calls to throwing functions occur within 'try' expression
+171 |             
+172 |             Task { @MainActor in
+173 |                 try? await appState.loadFile(at: url)
+    |                 `- warning: no calls to throwing functions occur within 'try' expression
+174 |             }
+175 |         }
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/App/MainWindow.swift:451:22: warning: 'onChange(of:perform:)' was deprecated in macOS 14.0: Use `onChange` with a two or zero parameter action closure instead. [#DeprecatedDeclaration]
+449 |                         // Setup
+450 |                     }
+451 |                     .onChange(of: appState.currentFrame) { newFrame in
+    |                      `- warning: 'onChange(of:perform:)' was deprecated in macOS 14.0: Use `onChange` with a two or zero parameter action closure instead. [#DeprecatedDeclaration]
+452 |                          syncVideoToFrame(frame: newFrame)
+453 |                     }
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/App/MainWindow.swift:454:22: warning: 'onChange(of:perform:)' was deprecated in macOS 14.0: Use `onChange` with a two or zero parameter action closure instead. [#DeprecatedDeclaration]
+452 |                          syncVideoToFrame(frame: newFrame)
+453 |                     }
+454 |                     .onChange(of: appState.isPlaying) { isPlaying in
+    |                      `- warning: 'onChange(of:perform:)' was deprecated in macOS 14.0: Use `onChange` with a two or zero parameter action closure instead. [#DeprecatedDeclaration]
+455 |                         if isPlaying {
+456 |                             player.play()
+
+[#DeprecatedDeclaration]: <https://docs.swift.org/compiler/documentation/diagnostics/deprecated-declaration>
+[8/15] Compiling BioMotionPro DataExporter.swift
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataExporter.swift:4:15: error: invalid redeclaration of 'DataExporter'
+  2 | 
+  3 | /// Export motion capture data to various formats
+  4 | public struct DataExporter {
+    |               `- error: invalid redeclaration of 'DataExporter'
+  5 |     
+  6 |     // MARK: - CSV Export
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataExporter.swift:84:17: error: invalid redeclaration of 'withFilledGaps(maxGapSize:)'
+ 82 | extension MarkerData {
+ 83 |     /// Fill gaps in marker data using linear interpolation
+ 84 |     public func withFilledGaps(maxGapSize: Int = 10) -> MarkerData {
+    |                 `- error: invalid redeclaration of 'withFilledGaps(maxGapSize:)'
+ 85 |         var filledPositions = self.positions
+ 86 |         
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataExporter.swift:132:15: error: invalid redeclaration of 'ReportGenerator'
+130 | // MARK: - Report Generator
+131 | 
+132 | public struct ReportGenerator {
+    |               `- error: invalid redeclaration of 'ReportGenerator'
+133 |     
+134 |     /// Generate HTML report for capture
+error: emit-module command failed with exit code 1 (use -v to see invocation)
+[9/15] Emitting module BioMotionPro
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/App/MainWindow.swift:283:8: error: invalid redeclaration of 'BatchProcessingView'
+281 | // MARK: - Batch Processing
+282 | 
+283 | struct BatchProcessingView: View {
+    |        `- error: invalid redeclaration of 'BatchProcessingView'
+284 |     @EnvironmentObject var appState: AppState
+285 |     @Environment(\.dismiss) var dismiss
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/App/MainWindow.swift:439:8: error: invalid redeclaration of 'VideoPlayerView'
+437 | // MARK: - Video Player
+438 | 
+439 | struct VideoPlayerView: View {
+    |        `- error: invalid redeclaration of 'VideoPlayerView'
+440 |     @EnvironmentObject var appState: AppState
+441 |     @State private var player: AVPlayer?
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataExporter.swift:4:15: error: invalid redeclaration of 'DataExporter'
+  2 | 
+  3 | /// Export motion capture data to various formats
+  4 | public struct DataExporter {
+    |               `- error: invalid redeclaration of 'DataExporter'
+  5 |     
+  6 |     // MARK: - CSV Export
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataExporter.swift:84:17: error: invalid redeclaration of 'withFilledGaps(maxGapSize:)'
+ 82 | extension MarkerData {
+ 83 |     /// Fill gaps in marker data using linear interpolation
+ 84 |     public func withFilledGaps(maxGapSize: Int = 10) -> MarkerData {
+    |                 `- error: invalid redeclaration of 'withFilledGaps(maxGapSize:)'
+ 85 |         var filledPositions = self.positions
+ 86 |         
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataExporter.swift:132:15: error: invalid redeclaration of 'ReportGenerator'
+130 | // MARK: - Report Generator
+131 | 
+132 | public struct ReportGenerator {
+    |               `- error: invalid redeclaration of 'ReportGenerator'
+133 |     
+134 |     /// Generate HTML report for capture
+[10/15] Compiling BioMotionPro BioMotionProApp.swift
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/App/BioMotionProApp.swift:482:36: error: ambiguous use of 'exportMarkersToCSV(capture:)'
+ 480 |         
+ 481 |         if panel.runModal() == .OK, let url = panel.url {
+ 482 |             let csv = DataExporter.exportMarkersToCSV(capture: capture)
+     |                                    `- error: ambiguous use of 'exportMarkersToCSV(capture:)'
+ 483 |             do {
+ 484 |                 try DataExporter.saveToFile(csv, url: url)
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataExporter.swift:9:24: note: found this candidate 
+  7 |     
+  8 |     /// Export marker data to CSV format
+  9 |     public static func exportMarkersToCSV(capture: MotionCapture) -> String {
+    |                        `- note: found this candidate 
+ 10 |         var csv = "Frame,Time"
+ 11 |         
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataModels.swift:390:24: note: found this candidate 
+388 |     
+389 |     /// Export marker data to CSV format
+390 |     public static func exportMarkersToCSV(capture: MotionCapture) -> String {
+    |                        `- note: found this candidate 
+391 |         var csv = "Frame,Time"
+392 |         
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/App/BioMotionProApp.swift:500:36: error: ambiguous use of 'exportAnalogsToCSV(capture:)'
+ 498 |         
+ 499 |         if panel.runModal() == .OK, let url = panel.url {
+ 500 |             let csv = DataExporter.exportAnalogsToCSV(capture: capture)
+     |                                    `- error: ambiguous use of 'exportAnalogsToCSV(capture:)'
+ 501 |             do {
+ 502 |                 try DataExporter.saveToFile(csv, url: url)
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataExporter.swift:39:24: note: found this candidate 
+ 37 |     
+ 38 |     /// Export analog data to CSV format
+ 39 |     public static func exportAnalogsToCSV(capture: MotionCapture) -> String {
+    |                        `- note: found this candidate 
+ 40 |         guard !capture.analogs.channels.isEmpty else {
+ 41 |             return "No analog data"
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataModels.swift:420:24: note: found this candidate 
+418 |     
+419 |     /// Export analog data to CSV format
+420 |     public static func exportAnalogsToCSV(capture: MotionCapture) -> String {
+    |                        `- note: found this candidate 
+421 |         guard !capture.analogs.channels.isEmpty else {
+422 |             return "No analog data"
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/App/BioMotionProApp.swift:518:40: error: ambiguous use of 'generateHTMLReport(capture:)'
+ 516 |         
+ 517 |         if panel.runModal() == .OK, let url = panel.url {
+ 518 |             let html = ReportGenerator.generateHTMLReport(capture: capture)
+     |                                        `- error: ambiguous use of 'generateHTMLReport(capture:)'
+ 519 |             do {
+ 520 |                 try DataExporter.saveToFile(html, url: url)
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataExporter.swift:135:24: note: found this candidate 
+133 |     
+134 |     /// Generate HTML report for capture
+135 |     public static func generateHTMLReport(capture: MotionCapture) -> String {
+    |                        `- note: found this candidate 
+136 |         let duration = Double(capture.frameCount) / capture.markers.frameRate
+137 |         
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataModels.swift:464:24: note: found this candidate 
+462 |     
+463 |     /// Generate HTML report for capture
+464 |     public static func generateHTMLReport(capture: MotionCapture) -> String {
+    |                        `- note: found this candidate 
+465 |         let duration = Double(capture.frameCount) / capture.markers.frameRate
+466 |         
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/App/BioMotionProApp.swift:563:45: error: ambiguous use of 'withFilledGaps(maxGapSize:)'
+ 561 |         
+ 562 |         // Fill gaps
+ 563 |         let filledMarkers = capture.markers.withFilledGaps(maxGapSize: 10)
+     |                                             `- error: ambiguous use of 'withFilledGaps(maxGapSize:)'
+ 564 |         
+ 565 |         // Count gaps after
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataExporter.swift:84:17: note: found this candidate 
+ 82 | extension MarkerData {
+ 83 |     /// Fill gaps in marker data using linear interpolation
+ 84 |     public func withFilledGaps(maxGapSize: Int = 10) -> MarkerData {
+    |                 `- note: found this candidate 
+ 85 |         var filledPositions = self.positions
+ 86 |         
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/IO/DataModels.swift:338:17: note: found this candidate 
+336 | extension MarkerData {
+337 |     /// Fill gaps in marker data using linear interpolation
+338 |     public func withFilledGaps(maxGapSize: Int = 10) -> MarkerData {
+    |                 `- note: found this candidate 
+339 |         var filledPositions = self.positions
+340 |         
+
+/Users/zaza/Documents/Ajmal-coding-Projects/Mokka/BioMotionPro/Sources/App/BioMotionProApp.swift:848:15: warning: 'catch' block is unreachable because no errors are thrown in 'do' block
+ 846 |                 }
+ 847 |                 
+ 848 |             } catch {
+     |               `- warning: 'catch' block is unreachable because no errors are thrown in 'do' block
+ 849 |                 await MainActor.run {
+ 850 |                     errorMessage = "Computation failed: \(error.localizedDescription)"
+error: fatalError
