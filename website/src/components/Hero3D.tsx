@@ -184,7 +184,7 @@ function AnalysisFloor() {
 
 function Scene() {
     return (
-        <group position={[2, 0, 0]}>
+        <group position={[3, -0.5, 0]}>
             <MocapSkeleton />
             <Environment preset="studio" />
             <AnalysisFloor />
@@ -196,19 +196,19 @@ function Scene() {
 
 export default function Hero3D() {
     return (
-        <section className="relative h-screen w-full flex items-center bg-gradient-to-br from-slate-50 to-slate-200 overflow-hidden">
+        <section className="relative h-screen min-h-[600px] w-full flex items-center bg-gradient-to-br from-slate-50 to-slate-200 overflow-hidden">
 
-            {/* 3D Background */}
+            {/* 3D Background - Full Screen */}
             <div className="absolute inset-0 z-0">
-                <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
+                <Canvas camera={{ position: [0, 1, 6], fov: 40 }}>
                     <ambientLight intensity={0.5} />
                     <Scene />
                 </Canvas>
             </div>
 
-            {/* Content Overlay */}
-            <div className="container mx-auto px-6 relative z-10 w-full">
-                <div className="max-w-2xl">
+            {/* Content Overlay - Constrained Width */}
+            <div className="container mx-auto px-6 relative z-10 w-full max-w-7xl pointer-events-none">
+                <div className="max-w-2xl pointer-events-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -217,21 +217,21 @@ export default function Hero3D() {
                         <span className="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-800 text-sm font-semibold mb-6">
                             v1.0 Now Available
                         </span>
-                        <h1 className="text-6xl font-bold tracking-tight text-slate-900 mb-6 leading-tight">
+                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 mb-6 leading-tight">
                             The Future of <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Biomechanics</span> Analysis.
                         </h1>
-                        <p className="text-xl text-slate-600 mb-8 leading-relaxed">
+                        <p className="text-lg md:text-xl text-slate-600 mb-8 leading-relaxed max-w-lg">
                             Native macOS performance. Medical-grade precision.
                             Visualize, compare, and analyze motion data like never before.
                         </p>
 
-                        <div className="flex gap-4">
+                        <div className="flex flex-col sm:flex-row gap-4">
                             <a href="https://github.com/contact-ajmal/BioMotionPro/releases/download/v1.0/BioMotionPro.dmg"
-                                className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold shadow-lg shadow-blue-500/30 transition-all hover:scale-105 flex items-center gap-2">
+                                className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold shadow-lg shadow-blue-500/30 transition-all hover:scale-105 flex items-center justify-center gap-2">
                                 Download for Mac
                             </a>
                             <a href="#features"
-                                className="px-8 py-4 bg-white hover:bg-slate-50 text-slate-900 border border-slate-200 rounded-xl font-semibold transition-all hover:scale-105">
+                                className="px-8 py-4 bg-white hover:bg-slate-50 text-slate-900 border border-slate-200 rounded-xl font-semibold transition-all hover:scale-105 flex items-center justify-center">
                                 Explore Features
                             </a>
                         </div>
