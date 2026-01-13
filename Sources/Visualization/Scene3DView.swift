@@ -16,50 +16,39 @@ struct Scene3DView: View {
     var capture: MotionCapture? = nil // Explicit capture to render (for side-by-side)
     
     var body: some View {
-        InternalScene3DView(capture: capture)
-            .overlay(alignment: .topTrailing) {
-                debugOverlay
-                    .padding(20)
-            }
-            .overlay(alignment: .trailing) {
-                toolsOverlay
-                    .padding(20)
-            }
-            .overlay(alignment: .bottom) {
-                playbackOverlay
-                    .padding(.bottom, 30)
-            }
+        VStack(spacing: 0) {
+            // MARK: - Top Toolbar
+            topToolbar
+            
+            // MARK: - 3D Scene
+            InternalScene3DView(capture: capture)
+            
+            // MARK: - Bottom Playback
+            playbackBar
+        }
     }
     
     // MARK: - UI Components
     
     @ViewBuilder
-    private var debugOverlay: some View {
-        if let c = capture ?? appState.currentCapture {
-            VStack(alignment: .trailing, spacing: 4) {
+    private var topToolbar: some View {
+        HStack(spacing: 16) {
+            // Data Info
+            if let c = capture ?? appState.currentCapture {
                 Text("\(c.markers.labels.count) Markers")
+                    .font(.caption.monospaced())
+                Text("•")
+                    .foregroundStyle(.secondary)
                 Text(appState.forcedSkeletonModel?.name ?? "Auto Skeleton")
+                    .font(.caption.monospaced())
             }
-            .font(.caption.monospaced())
-            .padding(8)
-            .background(.ultraThinMaterial)
-            .cornerRadius(6)
-        }
-    }
-    
-    @ViewBuilder
-    private var toolsOverlay: some View {
-        VStack(spacing: 12) {
+            
+            Spacer()
+            
             // Show Data Button
             Button(action: { openWindow(id: "data-editor") }) {
-                Image(systemName: "tablecells")
-                    .font(.system(size: 16))
-                    .frame(width: 44, height: 44)
-                    .background(.ultraThinMaterial)
-                    .clipShape(Circle())
-                    .shadow(radius: 4)
+                Label("Data", systemImage: "tablecells")
             }
-            .buttonStyle(.plain)
             .help("Show Data Editor")
             
             // Skeleton Options
@@ -80,12 +69,7 @@ struct Scene3DView: View {
                 Button("💾 Save Current Config...") { saveSkeletonConfig() }
                 
             } label: {
-                Image(systemName: "figure.walk")
-                    .font(.system(size: 20))
-                    .frame(width: 44, height: 44)
-                    .background(.ultraThinMaterial)
-                    .clipShape(Circle())
-                    .shadow(radius: 4)
+                Label("Skeleton", systemImage: "figure.walk")
             }
             .menuStyle(.borderlessButton)
             .help("Skeleton Settings")
@@ -99,89 +83,88 @@ struct Scene3DView: View {
                 Text("Marker Size")
                 Slider(value: $markerSize, in: 2...20) { Text("Marker Size") }
             } label: {
-                Image(systemName: "gearshape")
-                    .font(.system(size: 20))
-                    .frame(width: 44, height: 44)
-                    .background(.ultraThinMaterial)
-                    .clipShape(Circle())
-                    .shadow(radius: 4)
+                Label("View", systemImage: "eye")
             }
             .menuStyle(.borderlessButton)
             .help("View Settings")
             
-            // Zoom / Camera Controls
-            VStack(spacing: 0) {
-                Button(action: { NotificationCenter.default.post(name: .zoomIn, object: nil) }) {
-                    Image(systemName: "plus").frame(width: 44, height: 36)
-                }
-                Divider().frame(width: 30)
-                Button(action: { NotificationCenter.default.post(name: .resetCamera, object: nil) }) {
-                    Image(systemName: "arrow.counterclockwise").frame(width: 44, height: 36)
-                }
-                Divider().frame(width: 30)
+            Divider()
+                .frame(height: 20)
+            
+            // Camera Controls
+            HStack(spacing: 4) {
                 Button(action: { NotificationCenter.default.post(name: .zoomOut, object: nil) }) {
-                    Image(systemName: "minus").frame(width: 44, height: 36)
+                    Image(systemName: "minus.magnifyingglass")
                 }
+                .help("Zoom Out")
+                
+                Button(action: { NotificationCenter.default.post(name: .resetCamera, object: nil) }) {
+                    Image(systemName: "arrow.counterclockwise")
+                }
+                .help("Reset Camera")
+                
+                Button(action: { NotificationCenter.default.post(name: .zoomIn, object: nil) }) {
+                    Image(systemName: "plus.magnifyingglass")
+                }
+                .help("Zoom In")
             }
-            .background(.ultraThinMaterial)
-            .cornerRadius(12)
-            .shadow(radius: 4)
-            .help("Camera Controls")
+            
+            Divider()
+                .frame(height: 20)
             
             // Fullscreen
             Button(action: { NotificationCenter.default.post(name: .toggleFullscreen, object: nil) }) {
                 Image(systemName: "arrow.up.left.and.arrow.down.right")
-                    .font(.system(size: 16))
-                    .frame(width: 44, height: 44)
-                    .background(.ultraThinMaterial)
-                    .clipShape(Circle())
-                    .shadow(radius: 4)
             }
             .help("Fullscreen")
             
             // Follow Subject
             Button(action: { appState.followSubject.toggle() }) {
-                Image(systemName: "video.fill")
-                    .font(.system(size: 14))
+                Image(systemName: appState.followSubject ? "video.fill" : "video")
                     .foregroundStyle(appState.followSubject ? Color.red : Color.primary)
-                    .frame(width: 44, height: 44)
-                    .background(.ultraThinMaterial)
-                    .clipShape(Circle())
-                    .shadow(radius: 4)
             }
             .help("Follow Subject")
         }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
+        .background(.bar)
     }
     
     @ViewBuilder
-    private var playbackOverlay: some View {
+    private var playbackBar: some View {
         if let capture = appState.currentCapture {
-            VStack(spacing: 8) {
+            HStack(spacing: 16) {
+                // Frame Controls
+                Button(action: { appState.stepFrame(by: -1) }) {
+                    Image(systemName: "backward.frame.fill")
+                }
+                
+                Button(action: { appState.togglePlayback() }) {
+                    Image(systemName: appState.isPlaying ? "pause.circle.fill" : "play.circle.fill")
+                        .font(.system(size: 24))
+                }
+                .keyboardShortcut(.space, modifiers: [])
+                
+                Button(action: { appState.stepFrame(by: 1) }) {
+                    Image(systemName: "forward.frame.fill")
+                }
+                
+                // Slider
                 Slider(value: Binding(
                     get: { Double(appState.currentFrame) },
                     set: { appState.currentFrame = Int($0) }
                 ), in: 0...Double(capture.frameCount - 1))
                 .tint(AppTheme.accent)
                 
-                HStack(spacing: 16) {
-                    Button(action: { appState.stepFrame(by: -1) }) { Image(systemName: "backward.frame.fill") }
-                    Button(action: { appState.togglePlayback() }) {
-                        Image(systemName: appState.isPlaying ? "pause.circle.fill" : "play.circle.fill")
-                            .font(.system(size: 32))
-                    }
-                    .keyboardShortcut(.space, modifiers: [])
-                    Button(action: { appState.stepFrame(by: 1) }) { Image(systemName: "forward.frame.fill") }
-                    
-                    Text("\(appState.currentFrame + 1) / \(capture.frameCount)")
-                        .font(.caption.monospaced())
-                        .foregroundStyle(.secondary)
-                }
+                // Frame Counter
+                Text("\(appState.currentFrame + 1) / \(capture.frameCount)")
+                    .font(.caption.monospaced())
+                    .foregroundStyle(.secondary)
+                    .frame(width: 80, alignment: .trailing)
             }
-            .padding()
-            .frame(width: 400)
-            .background(.ultraThinMaterial)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
-            .shadow(radius: 4)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 10)
+            .background(.bar)
         }
     }
     
