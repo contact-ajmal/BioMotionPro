@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - BioMotionPro</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="logo.png" alt="BioMotionPro Logo">
+                <span>BioMotionPro</span>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="documentation.html" style="color: var(--primary-color);">Documentation</a>
+                <a href="https://github.com/contact-ajmal/BioMotionPro" class="github-link">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="docs-layout">
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li><a href="#introduction">Introduction</a></li>
+                        <li><a href="#installation">Installation</a></li>
+                        <li><a href="#features">Core Features</a></li>
+                        <li><a href="#advanced">Advanced Usage</a></li>
+                        <li><a href="#development">Development</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <section id="introduction">
+                    <h1>Introduction</h1>
+                    <p>BioMotionPro is a high-performance biomechanics analysis application designed natively for macOS.
+                        Leveraging the power of Apple Silicon and Metal, it provides real-time visualization and
+                        analysis of motion capture data.</p>
+
+                    <h3>System Requirements</h3>
+                    <ul>
+                        <li><strong>OS</strong>: macOS 14.0 (Sonoma) or later</li>
+                        <li><strong>Processor</strong>: Apple Silicon (M1/M2/M3) recommended</li>
+                        <li><strong>RAM</strong>: 8GB minimum (16GB recommended for large datasets)</li>
+                    </ul>
+                </section>
+
+                <section id="installation">
+                    <h2>Installation</h2>
+                    <p>Installing BioMotionPro is straightforward using the provided DMG installer.</p>
+
+                    <h3>Step-by-Step Guide</h3>
+                    <ol>
+                        <li>Download the latest release from the <a
+                                href="https://github.com/contact-ajmal/BioMotionPro/releases">GitHub Releases page</a>.
+                        </li>
+                        <li>Open the <code>BioMotionPro.dmg</code> file.</li>
+                        <li>Drag the BioMotionPro application icon into the Applications folder shortcut.</li>
+                        <li>Eject the disk image.</li>
+                    </ol>
+
+                    <div class="doc-block"
+                        style="background: #FFF8E1; padding: 15px; border-radius: 8px; border: 1px solid #FFECB3;">
+                        <h4 style="color: #F57F17; margin-top: 0;">⚠️ Security Notice</h4>
+                        <p style="margin-bottom: 0;">On the first launch, macOS Gatekeeper may prevent the app from
+                            opening because it is not notarized. To bypass this, <strong>Right-click</strong> the app
+                            and select <strong>Open</strong>, then click <strong>Open</strong> again in the dialog box.
+                        </p>
+                    </div>
+                </section>
+
+                <section id="features">
+                    <h2>Core Features</h2>
+
+                    <h3>Data Import</h3>
+                    <p>BioMotionPro supports the industry-standard formats for motion capture data used in research and
+                        clinical gait analysis.</p>
+                    <ul>
+                        <li><strong>C3D (Coordinate 3D)</strong>: The standard for biomechanics data. Supports markers,
+                            analog data, and force plates.</li>
+                        <li><strong>TRC (Track Row Column)</strong>: OpenSim marker trajectory format.</li>
+                        <li><strong>MOT (Motion)</strong>: OpenSim motion file format (inverse kinematics results).</li>
+                    </ul>
+
+                    <h3>Visualization</h3>
+                    <p>The 3D view is built on Metal for seamless performance.</p>
+                    <ul>
+                        <li><strong>Skeleton Detection</strong>: Automatically identifies Plug-in Gait and Helen Hayes
+                            marker sets to render a wired skeleton.</li>
+                        <li><strong>Force Vectors</strong>: Visualizes ground reaction forces (GRF) dynamically as
+                            arrows originating from force plates.</li>
+                        <li><strong>Camera Control</strong>: Orbit, pan, and zoom using standard macOS gestures or mouse
+                            input.</li>
+                    </ul>
+                </section>
+
+                <section id="advanced">
+                    <h2>Advanced Usage</h2>
+
+                    <h3>Side-by-Side Comparison</h3>
+                    <p>Compare two trials simultaneously to analyze kinematic differences.</p>
+                    <ol>
+                        <li>Open the primary trial file.</li>
+                        <li>Click the <strong>Comparison</strong> button in the toolbar.</li>
+                        <li>Select the secondary file.</li>
+                        <li>Enable <strong>Sync Cameras</strong> to lock the viewpoints of both trials together.</li>
+                    </ol>
+
+                    <h3>Batch Processing</h3>
+                    <p>Process multiple files to export data efficiently.</p>
+                    <ol>
+                        <li>Go to <code>File > Batch Process...</code></li>
+                        <li>Drag and drop multiple C3D/TRC files into the window.</li>
+                        <li>Click <strong>Process All</strong> to export CSV data for all files to their original
+                            directories.</li>
+                    </ol>
+                </section>
+
+                <section id="development">
+                    <h2>Development</h2>
+                    <p>BioMotionPro is open source and written in Swift 5.9.</p>
+
+                    <h3>Building from Source</h3>
+                    <pre><code>git clone https://github.com/contact-ajmal/BioMotionPro.git
+cd BioMotionPro
+xcodebuild -project BioMotionPro/BioMotionPro.xcodeproj -scheme BioMotionPro -configuration Release</code></pre>
+
+                    <p>Contributions are welcome via Pull Requests on GitHub.</p>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 BioMotionPro. Released under MIT License.</p>
+            <p>Created by <a href="https://github.com/contact-ajmal">Ajmal</a></p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
