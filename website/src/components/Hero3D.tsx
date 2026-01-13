@@ -1,41 +1,85 @@
 import { useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { Sphere, MeshDistortMaterial, Environment } from '@react-three/drei'
+import { Sphere, Environment } from '@react-three/drei'
 import { motion } from 'framer-motion'
 import * as THREE from 'three'
 
-function AnimatedJoint({ position, color, speed }: { position: [number, number, number], color: string, speed: number }) {
-    const mesh = useRef<THREE.Mesh>(null!)
+const JOINTS = {
+    head: [0, 1.8, 0],
+    neck: [0, 1.5, 0],
+    shoulderL: [-0.4, 1.4, 0],
+    shoulderR: [0.4, 1.4, 0],
+    elbowL: [-0.7, 1.0, 0.2],
+    elbowR: [0.7, 1.0, -0.2],
+    handL: [-0.9, 0.6, 0.4],
+    handR: [0.9, 0.6, -0.4],
+    spine: [0, 1.0, 0],
+    hipL: [-0.3, 0.8, 0],
+    hipR: [0.3, 0.8, 0],
+    kneeL: [-0.3, 0.4, 0.3],
+    kneeR: [0.3, 0.4, 0.3],
+    footL: [-0.3, 0.0, 0],
+    footR: [0.3, 0.0, 0],
+} as const
+
+const BONES = [
+    ['head', 'neck'],
+    ['neck', 'spine'],
+    ['neck', 'shoulderL'], ['neck', 'shoulderR'],
+    ['shoulderL', 'elbowL'], ['elbowL', 'handL'],
+    ['shoulderR', 'elbowR'], ['elbowR', 'handR'],
+    ['spine', 'hipL'], ['spine', 'hipR'],
+    ['hipL', 'kneeL'], ['kneeL', 'footL'],
+    ['hipR', 'kneeR'], ['kneeR', 'footR'],
+]
+
+function MocapSkeleton() {
+    const group = useRef<THREE.Group>(null!)
 
     useFrame((state) => {
-        mesh.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * speed) * 0.2
-        mesh.current.rotation.x = state.clock.elapsedTime * 0.5
-        mesh.current.rotation.y = state.clock.elapsedTime * 0.2
+        // Slow rotation to show 3D depth
+        group.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.3) * 0.5
+        // Floating effect
+        group.current.position.y = -0.5 + Math.sin(state.clock.elapsedTime * 0.5) * 0.1
     })
 
     return (
-        <Sphere args={[0.4, 32, 32]} position={position} ref={mesh}>
-            <MeshDistortMaterial
-                color={color}
-                speed={2}
-                distort={0.4}
-                roughness={0.2}
-                metalness={0.8}
-            />
-        </Sphere>
+        <group ref={group}>
+            {/* Joints */}
+            {Object.entries(JOINTS).map(([name, pos]) => (
+                <Sphere key={name} args={[0.08, 16, 16]} position={pos as [number, number, number]}>
+                    <meshStandardMaterial color={name.includes('L') ? '#00A3E0' : '#0066CC'} emissive="#002244" emissiveIntensity={0.5} roughness={0.4} />
+                </Sphere>
+            ))}
+
+            {/* Bones */}
+            {BONES.map(([start, end], i) => {
+                const startPos = new THREE.Vector3(...JOINTS[start as keyof typeof JOINTS])
+                const endPos = new THREE.Vector3(...JOINTS[end as keyof typeof JOINTS])
+                const length = startPos.distanceTo(endPos)
+                const midPoint = startPos.clone().add(endPos).multiplyScalar(0.5)
+
+                // Calculate rotation to align cylinder with points
+                const direction = endPos.clone().sub(startPos).normalize()
+                const quaternion = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), direction)
+
+                return (
+                    <mesh key={i} position={midPoint} quaternion={quaternion}>
+                        <cylinderGeometry args={[0.02, 0.02, length, 8]} />
+                        <meshStandardMaterial color="#AABBDD" transparent opacity={0.6} />
+                    </mesh>
+                )
+            })}
+        </group>
     )
 }
 
 function Scene() {
     return (
         <group position={[2, 0, 0]}>
-            <AnimatedJoint position={[0, 1.5, 0]} color="#0066CC" speed={1.2} />
-            <AnimatedJoint position={[-1, 0, 0]} color="#00A3E0" speed={1.5} />
-            <AnimatedJoint position={[1, 0, 0]} color="#00A3E0" speed={1.5} />
-            <AnimatedJoint position={[0, -1.5, 0]} color="#0066CC" speed={1.2} />
-
-            {/* Connections would ideally be dynamic, simplified here for abstract look */}
+            <MocapSkeleton />
             <Environment preset="city" />
+            <gridHelper args={[10, 10, 0xdddddd, 0xeeeeee]} position={[0, -0.5, 0]} />
         </group>
     )
 }
