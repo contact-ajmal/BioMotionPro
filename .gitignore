@@ -47,3 +47,7 @@ test_result_final_2.txt
 test_result_final_3.txt
 coverage/
 features/
+.build/
+*.app/
+*.dmg
+BioMotionPro

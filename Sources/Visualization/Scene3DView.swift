@@ -16,10 +16,10 @@ struct Scene3DView: View {
     var capture: MotionCapture? = nil // Explicit capture to render (for side-by-side)
     
     var body: some View {
-        ZStack(alignment: .bottomTrailing) {
+        ZStack { // Default center alignment, we will use frames to position overlays
             InternalScene3DView(capture: capture)
             
-            // Debug Info Overlay (Top Left)
+            // 1. Debug Info Overlay (Top Left)
             VStack(alignment: .leading, spacing: 4) {
                  if let c = capture ?? appState.currentCapture {
                      Text("Markers: \(c.markers.labels.count)")
@@ -31,10 +31,10 @@ struct Scene3DView: View {
             .background(.black.opacity(0.6))
             .foregroundColor(.white)
             .cornerRadius(4)
-            .padding(8)
+            .padding(12)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             
-            // Floating Playback Controls (Bottom Center)
+            // 2. Floating Playback Controls (Bottom Center)
             if let capture = appState.currentCapture {
                 VStack(spacing: 8) {
                     // Frame Slider
@@ -68,7 +68,7 @@ struct Scene3DView: View {
                     }
                 }
                 .padding()
-                .frame(maxWidth: 400)
+                .frame(width: 400) // Fixed width for stability
                 .background(.ultraThinMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
                 .overlay(
@@ -76,19 +76,22 @@ struct Scene3DView: View {
                          .stroke(Color.white.opacity(0.1), lineWidth: 0.5)
                  )
                 .padding(.bottom, 24)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom) // Explicit Bottom Center
             }
             
-            // Floating Controls (Right Side)
-            VStack(spacing: 12) {
+            // 3. Floating Toolbar (Right Side)
+            // options should be on the right of window
+            VStack(spacing: 16) {
                 // Show Data Button
                 Button(action: {
                     openWindow(id: "data-editor")
                 }) {
                     Image(systemName: "tablecells")
                         .font(.system(size: 16))
-                        .frame(width: 32, height: 32)
+                        .frame(width: 40, height: 40)
                         .background(.ultraThinMaterial)
                         .clipShape(Circle())
+                        .shadow(radius: 2)
                 }
                 .buttonStyle(.plain)
                 .help("Show Data Editor")
@@ -140,10 +143,11 @@ struct Scene3DView: View {
                     
                 } label: {
                     Image(systemName: "figure.walk")
-                        .font(.system(size: 16))
-                        .frame(width: 32, height: 32)
+                        .font(.system(size: 18))
+                        .frame(width: 40, height: 40)
                         .background(.ultraThinMaterial)
                         .clipShape(Circle())
+                        .shadow(radius: 2)
                 }
                 .menuStyle(.borderlessButton)
                 .help("Skeleton Settings")
@@ -160,10 +164,11 @@ struct Scene3DView: View {
                     }
                 } label: {
                     Image(systemName: "gearshape")
-                        .font(.system(size: 16))
-                        .frame(width: 32, height: 32)
+                        .font(.system(size: 18))
+                        .frame(width: 40, height: 40)
                         .background(.ultraThinMaterial)
                         .clipShape(Circle())
+                        .shadow(radius: 2)
                 }
                 .menuStyle(.borderlessButton)
                 .help("View Settings")
@@ -174,31 +179,32 @@ struct Scene3DView: View {
                         NotificationCenter.default.post(name: .zoomIn, object: nil)
                     }) {
                         Image(systemName: "plus")
-                            .frame(width: 32, height: 24)
+                            .frame(width: 40, height: 32)
                     }
                     
                     Divider()
-                        .frame(width: 20)
+                        .frame(width: 25)
                     
                     Button(action: {
                         NotificationCenter.default.post(name: .resetCamera, object: nil)
                     }) {
                         Image(systemName: "arrow.counterclockwise")
-                            .frame(width: 32, height: 24)
+                            .frame(width: 40, height: 32)
                     }
                     
                     Divider()
-                        .frame(width: 20)
+                        .frame(width: 25)
                     
                     Button(action: {
                         NotificationCenter.default.post(name: .zoomOut, object: nil)
                     }) {
                         Image(systemName: "minus")
-                            .frame(width: 32, height: 24)
+                            .frame(width: 40, height: 32)
                     }
                 }
                 .background(.ultraThinMaterial)
-                .cornerRadius(8)
+                .cornerRadius(10)
+                .shadow(radius: 2)
                 .help("Camera Controls")
                 
                 // Fullscreen
@@ -207,9 +213,10 @@ struct Scene3DView: View {
                 }) {
                     Image(systemName: "arrow.up.left.and.arrow.down.right")
                     .font(.system(size: 16))
-                    .frame(width: 32, height: 32)
+                    .frame(width: 40, height: 40)
                     .background(.ultraThinMaterial)
                     .clipShape(Circle())
+                    .shadow(radius: 2)
                 }
                 .help("Fullscreen")
                 
@@ -220,13 +227,15 @@ struct Scene3DView: View {
                     Image(systemName: "video.fill")
                         .font(.system(size: 14))
                         .foregroundStyle(appState.followSubject ? Color.red : Color.primary) // Highlight when active
-                        .frame(width: 32, height: 32)
+                        .frame(width: 40, height: 40)
                         .background(.ultraThinMaterial)
                         .clipShape(Circle())
+                        .shadow(radius: 2)
                 }
                 .help("Follow Subject")
             }
             .padding(16)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing) // Explicit Right Alignment
         }
     }
     
