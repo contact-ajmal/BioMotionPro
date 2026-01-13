@@ -74,6 +74,12 @@ struct Scene3DView: View {
             .menuStyle(.borderlessButton)
             .help("Skeleton Settings")
             
+            // Edit Skeleton (opens designer window)
+            Button(action: { openWindow(id: "skeleton-designer") }) {
+                Label("Edit", systemImage: "pencil.and.outline")
+            }
+            .help("Open Skeleton Designer")
+            
             // View Options
             Menu {
                 Toggle("Show Grid", isOn: $showGrid)

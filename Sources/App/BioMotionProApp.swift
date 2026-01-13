@@ -61,6 +61,13 @@ struct BioMotionProApp: App {
                 .environmentObject(appState)
                 .focusedSceneValue(\.appState, appState)
         }
+        
+        WindowGroup("Skeleton Designer", id: "skeleton-designer") {
+            SkeletonDesignerView()
+                .environmentObject(appState)
+                .focusedSceneValue(\.appState, appState)
+        }
+        .defaultSize(width: 900, height: 600)
     }
 }
 
