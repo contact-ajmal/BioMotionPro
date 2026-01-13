@@ -32,7 +32,7 @@ public struct SkeletonModel: Sendable {
         
         for (i, pos) in positions.enumerated() {
             if let p = pos, p.x.isFinite && p.y.isFinite && p.z.isFinite {
-                let label = labels[safe: i] ?? "M\(i)"
+                let label = (i < labels.count ? labels[i] : nil) ?? "M\(i)"
                 validMarkers.append((i, p, label))
             }
         }

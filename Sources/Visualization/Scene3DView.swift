@@ -16,226 +16,176 @@ struct Scene3DView: View {
     var capture: MotionCapture? = nil // Explicit capture to render (for side-by-side)
     
     var body: some View {
-        ZStack { // Default center alignment, we will use frames to position overlays
+        ZStack {
             InternalScene3DView(capture: capture)
             
-            // 1. Debug Info Overlay (Top Left)
-            VStack(alignment: .leading, spacing: 4) {
-                 if let c = capture ?? appState.currentCapture {
-                     Text("Markers: \(c.markers.labels.count)")
-                     Text("Skeleton: \(appState.forcedSkeletonModel?.name ?? "Auto")")
-                 }
-            }
-            .font(.caption)
-            .padding(8)
-            .background(.black.opacity(0.6))
-            .foregroundColor(.white)
-            .cornerRadius(4)
-            .padding(12)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            // --- UI LAYER ---
+            // using GeometryReader for safety, but frames usually suffice.
             
-            // 2. Floating Playback Controls (Bottom Center)
+            // 1. RIGHT SIDEBAR (Debug + Tools)
+            HStack {
+                Spacer() // Push everything to the right
+                
+                VStack(alignment: .trailing, spacing: 16) {
+                    
+                    // A. Debug Info (Now on Top Right)
+                    if let c = capture ?? appState.currentCapture {
+                        VStack(alignment: .trailing, spacing: 4) {
+                            Text("\(c.markers.labels.count) Markers")
+                            Text(appState.forcedSkeletonModel?.name ?? "Auto Skeleton")
+                        }
+                        .font(.caption.monospaced())
+                        .padding(8)
+                        .background(.ultraThinMaterial)
+                        .cornerRadius(6)
+                    }
+                    
+                    Spacer()
+                    
+                    // B. Tool Dock (Center/Bottom Right)
+                    VStack(spacing: 12) {
+                        // Show Data Button
+                        Button(action: {
+                            openWindow(id: "data-editor")
+                        }) {
+                            Image(systemName: "tablecells")
+                                .font(.system(size: 16))
+                                .frame(width: 44, height: 44)
+                                .background(.ultraThinMaterial)
+                                .clipShape(Circle())
+                                .shadow(radius: 4)
+                        }
+                        .buttonStyle(.plain)
+                        .help("Show Data Editor")
+                        
+                        // Skeleton Options
+                        Menu {
+                            Text("Skeleton Model")
+                            
+                            Button("Auto-Detect") { print("Auto-detect requested") }
+                            Divider()
+                            Button("🧠 Auto-Identify by Position") { applySpatialSkeletonIdentification() }
+                            Button("🔗 Auto-Connect (Distance)") { applyDistanceBasedSkeleton() }
+                            Divider()
+                            Button("📊 Debug: Print Marker Bounds") { debugPrintMarkerBounds() }
+                            Button("🔄 Swap Y↔Z (Coordinate Fix)") { swapYZCoordinates() }
+                            Divider()
+                            Button("➖ Simple Lines (Connect All)") { applySimpleLinesSkeleton() }
+                            Divider()
+                            Button("📂 Load Skeleton Config...") { loadSkeletonConfig() }
+                            Button("💾 Save Current Config...") { saveSkeletonConfig() }
+                            
+                        } label: {
+                            Image(systemName: "figure.walk")
+                                .font(.system(size: 20)) // Larger Icon
+                                .frame(width: 44, height: 44)
+                                .background(.ultraThinMaterial)
+                                .clipShape(Circle())
+                                .shadow(radius: 4)
+                        }
+                        .menuStyle(.borderlessButton)
+                        .help("Skeleton Settings")
+                        
+                        // View Options
+                        Menu {
+                            Toggle("Show Grid", isOn: $showGrid)
+                            Toggle("Show Axes", isOn: $showAxes)
+                            Toggle("Show Force Plates", isOn: $showForcePlates)
+                            Divider()
+                            Text("Marker Size")
+                            Slider(value: $markerSize, in: 2...20) { Text("Marker Size") }
+                        } label: {
+                            Image(systemName: "gearshape")
+                                .font(.system(size: 20))
+                                .frame(width: 44, height: 44)
+                                .background(.ultraThinMaterial)
+                                .clipShape(Circle())
+                                .shadow(radius: 4)
+                        }
+                        .menuStyle(.borderlessButton)
+                        .help("View Settings")
+                        
+                        // Zoom / Camera Controls (Vertical Pill)
+                        VStack(spacing: 0) {
+                            Button(action: { NotificationCenter.default.post(name: .zoomIn, object: nil) }) {
+                                Image(systemName: "plus").frame(width: 44, height: 36)
+                            }
+                            Divider().frame(width: 30)
+                            Button(action: { NotificationCenter.default.post(name: .resetCamera, object: nil) }) {
+                                Image(systemName: "arrow.counterclockwise").frame(width: 44, height: 36)
+                            }
+                            Divider().frame(width: 30)
+                            Button(action: { NotificationCenter.default.post(name: .zoomOut, object: nil) }) {
+                                Image(systemName: "minus").frame(width: 44, height: 36)
+                            }
+                        }
+                        .background(.ultraThinMaterial)
+                        .cornerRadius(12)
+                        .shadow(radius: 4)
+                        .help("Camera Controls")
+                        
+                        // Fullscreen
+                        Button(action: { NotificationCenter.default.post(name: .toggleFullscreen, object: nil) }) {
+                            Image(systemName: "arrow.up.left.and.arrow.down.right")
+                                .font(.system(size: 16))
+                                .frame(width: 44, height: 44)
+                                .background(.ultraThinMaterial)
+                                .clipShape(Circle())
+                                .shadow(radius: 4)
+                        }
+                        .help("Fullscreen")
+                        
+                        // Follow Subject
+                        Button(action: { appState.followSubject.toggle() }) {
+                            Image(systemName: "video.fill")
+                                .font(.system(size: 14))
+                                .foregroundStyle(appState.followSubject ? Color.red : Color.primary)
+                                .frame(width: 44, height: 44)
+                                .background(.ultraThinMaterial)
+                                .clipShape(Circle())
+                                .shadow(radius: 4)
+                        }
+                        .help("Follow Subject")
+                    }
+                }
+                .padding(20) // Right Padding
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
+            
+            // 2. BOTTOM (Playback)
             if let capture = appState.currentCapture {
-                VStack(spacing: 8) {
-                    // Frame Slider
-                    Slider(value: Binding(
-                        get: { Double(appState.currentFrame) },
-                        set: { appState.currentFrame = Int($0) }
-                    ), in: 0...Double(capture.frameCount - 1))
-                    .tint(AppTheme.accent)
-                    
-                    HStack(spacing: 16) {
-                        Button(action: { appState.stepFrame(by: -1) }) {
-                            Image(systemName: "backward.frame.fill")
+                VStack {
+                    Spacer()
+                    VStack(spacing: 8) {
+                        Slider(value: Binding(
+                            get: { Double(appState.currentFrame) },
+                            set: { appState.currentFrame = Int($0) }
+                        ), in: 0...Double(capture.frameCount - 1))
+                        .tint(AppTheme.accent)
+                        
+                        HStack(spacing: 16) {
+                            Button(action: { appState.stepFrame(by: -1) }) { Image(systemName: "backward.frame.fill") }
+                            Button(action: { appState.togglePlayback() }) {
+                                Image(systemName: appState.isPlaying ? "pause.circle.fill" : "play.circle.fill")
+                                    .font(.system(size: 32))
+                            }
+                            .keyboardShortcut(.space, modifiers: [])
+                            Button(action: { appState.stepFrame(by: 1) }) { Image(systemName: "forward.frame.fill") }
+                            
+                            Text("\(appState.currentFrame + 1) / \(capture.frameCount)")
+                                .font(.caption.monospaced())
+                                .foregroundStyle(.secondary)
                         }
-                        
-                        Button(action: { appState.togglePlayback() }) {
-                            Image(systemName: appState.isPlaying ? "pause.circle.fill" : "play.circle.fill")
-                                .font(.system(size: 32))
-                        }
-                        .keyboardShortcut(.space, modifiers: [])
-                        
-                        Button(action: { appState.stepFrame(by: 1) }) {
-                            Image(systemName: "forward.frame.fill")
-                        }
-                        
-                        Divider()
-                            .frame(height: 16)
-                        
-                        Text("\(appState.currentFrame + 1) / \(capture.frameCount)")
-                            .font(.caption.monospaced())
-                            .foregroundStyle(.secondary)
                     }
-                }
-                .padding()
-                .frame(width: 400) // Fixed width for stability
-                .background(.ultraThinMaterial)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
-                .overlay(
-                     RoundedRectangle(cornerRadius: 16)
-                         .stroke(Color.white.opacity(0.1), lineWidth: 0.5)
-                 )
-                .padding(.bottom, 24)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom) // Explicit Bottom Center
-            }
-            
-            // 3. Floating Toolbar (Right Side)
-            // options should be on the right of window
-            VStack(spacing: 16) {
-                // Show Data Button
-                Button(action: {
-                    openWindow(id: "data-editor")
-                }) {
-                    Image(systemName: "tablecells")
-                        .font(.system(size: 16))
-                        .frame(width: 40, height: 40)
-                        .background(.ultraThinMaterial)
-                        .clipShape(Circle())
-                        .shadow(radius: 2)
-                }
-                .buttonStyle(.plain)
-                .help("Show Data Editor")
-                
-                // Skeleton Options
-                Menu {
-                    Text("Skeleton Model")
-                    
-                    Button("Auto-Detect") {
-                        // Re-trigger auto-detection
-                        print("Auto-detect requested")
-                    }
-                    
-                    Divider()
-                    
-                    Button("🧠 Auto-Identify by Position") {
-                        applySpatialSkeletonIdentification()
-                    }
-                    
-                    Button("🔗 Auto-Connect (Distance)") {
-                        applyDistanceBasedSkeleton()
-                    }
-                    
-                    Divider()
-                    
-                    Button("📊 Debug: Print Marker Bounds") {
-                        debugPrintMarkerBounds()
-                    }
-                    
-                    Button("🔄 Swap Y↔Z (Coordinate Fix)") {
-                        swapYZCoordinates()
-                    }
-                    
-                    Divider()
-                    
-                    Button("➖ Simple Lines (Connect All)") {
-                        applySimpleLinesSkeleton()
-                    }
-                    
-                    Divider()
-                    
-                    Button("📂 Load Skeleton Config...") {
-                        loadSkeletonConfig()
-                    }
-                    
-                    Button("💾 Save Current Config...") {
-                        saveSkeletonConfig()
-                    }
-                    
-                } label: {
-                    Image(systemName: "figure.walk")
-                        .font(.system(size: 18))
-                        .frame(width: 40, height: 40)
-                        .background(.ultraThinMaterial)
-                        .clipShape(Circle())
-                        .shadow(radius: 2)
-                }
-                .menuStyle(.borderlessButton)
-                .help("Skeleton Settings")
-                
-                // View Options
-                Menu {
-                    Toggle("Show Grid", isOn: $showGrid)
-                    Toggle("Show Axes", isOn: $showAxes)
-                    Toggle("Show Force Plates", isOn: $showForcePlates)
-                    Divider()
-                    Text("Marker Size")
-                    Slider(value: $markerSize, in: 2...20) {
-                        Text("Marker Size")
-                    }
-                } label: {
-                    Image(systemName: "gearshape")
-                        .font(.system(size: 18))
-                        .frame(width: 40, height: 40)
-                        .background(.ultraThinMaterial)
-                        .clipShape(Circle())
-                        .shadow(radius: 2)
-                }
-                .menuStyle(.borderlessButton)
-                .help("View Settings")
-                
-                // Zoom / Camera Controls
-                VStack(spacing: 1) {
-                    Button(action: { 
-                        NotificationCenter.default.post(name: .zoomIn, object: nil)
-                    }) {
-                        Image(systemName: "plus")
-                            .frame(width: 40, height: 32)
-                    }
-                    
-                    Divider()
-                        .frame(width: 25)
-                    
-                    Button(action: {
-                        NotificationCenter.default.post(name: .resetCamera, object: nil)
-                    }) {
-                        Image(systemName: "arrow.counterclockwise")
-                            .frame(width: 40, height: 32)
-                    }
-                    
-                    Divider()
-                        .frame(width: 25)
-                    
-                    Button(action: {
-                        NotificationCenter.default.post(name: .zoomOut, object: nil)
-                    }) {
-                        Image(systemName: "minus")
-                            .frame(width: 40, height: 32)
-                    }
-                }
-                .background(.ultraThinMaterial)
-                .cornerRadius(10)
-                .shadow(radius: 2)
-                .help("Camera Controls")
-                
-                // Fullscreen
-                Button(action: {
-                    NotificationCenter.default.post(name: .toggleFullscreen, object: nil)
-                }) {
-                    Image(systemName: "arrow.up.left.and.arrow.down.right")
-                    .font(.system(size: 16))
-                    .frame(width: 40, height: 40)
+                    .padding()
+                    .frame(width: 400)
                     .background(.ultraThinMaterial)
-                    .clipShape(Circle())
-                    .shadow(radius: 2)
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    .shadow(radius: 4)
+                    .padding(.bottom, 30)
                 }
-                .help("Fullscreen")
-                
-                // Follow Subject
-                Button(action: {
-                    appState.followSubject.toggle()
-                }) {
-                    Image(systemName: "video.fill")
-                        .font(.system(size: 14))
-                        .foregroundStyle(appState.followSubject ? Color.red : Color.primary) // Highlight when active
-                        .frame(width: 40, height: 40)
-                        .background(.ultraThinMaterial)
-                        .clipShape(Circle())
-                        .shadow(radius: 2)
-                }
-                .help("Follow Subject")
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             }
-            .padding(16)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing) // Explicit Right Alignment
         }
     }
     
@@ -285,8 +235,8 @@ struct Scene3DView: View {
         var markerInfo: [(index: Int, original: String, renamed: String, y: Float)] = []
         
         for (i, pos) in positions.enumerated() {
-            let origLabel = capture.markers.labels[safe: i] ?? "?"
-            let newLabel = newLabels[safe: i] ?? "?"
+            let origLabel = (i < capture.markers.labels.count ? capture.markers.labels[i] : nil) ?? "?"
+            let newLabel = (i < newLabels.count ? newLabels[i] : nil) ?? "?"
             let yPos = pos?.y ?? -9999
             markerInfo.append((i, origLabel, newLabel, yPos))
         }
@@ -341,7 +291,7 @@ struct Scene3DView: View {
         // Print the mapping
         print("\n📍 SPATIAL IDENTIFICATION RESULTS:")
         for (i, label) in identifiedLabels.enumerated() {
-            let pos = positions[safe: i] ?? nil
+            let pos = (i < positions.count ? positions[i] : nil) ?? nil
             let yStr = pos != nil ? String(format: "%.1f", pos!.y) : "N/A"
             print("  [\(String(format: "%02d", i))] Y=\(yStr) → \(label)")
         }
@@ -640,13 +590,7 @@ struct Scene3DView: View {
     }
 }
 
-extension Notification.Name {
-    static let resetCamera = Notification.Name("ResetCamera")
-    static let zoomIn = Notification.Name("ZoomIn")
-    static let zoomOut = Notification.Name("ZoomOut")
-    static let toggleFullscreen = Notification.Name("ToggleFullscreen")
-    static let openDataEditor = Notification.Name("OpenDataEditor")
-}
+
 
 /// Metal-based 3D visualization for motion capture data
 struct InternalScene3DView: NSViewRepresentable {
@@ -1122,7 +1066,7 @@ class SceneRenderer: NSObject, MTKViewDelegate {
         let targetCapture = explicitCapture ?? appState.currentCapture
         
         // Detect skeleton on capture change
-        if capturesAreDifferent(targetCapture, currentCapture) {
+        if globalCapturesAreDifferent(targetCapture, currentCapture) {
             currentCapture = targetCapture
             
             if let capture = currentCapture {
@@ -1321,8 +1265,8 @@ class SceneRenderer: NSObject, MTKViewDelegate {
                 continue
             }
             
-            guard let startPos = positions[safe: startIdx] ?? nil,
-                  let endPos = positions[safe: endIdx] ?? nil else {
+            guard let startPos = (startIdx < positions.count ? positions[startIdx] : nil) ?? nil,
+                  let endPos = (endIdx < positions.count ? positions[endIdx] : nil) ?? nil else {
                 // Occluded
                 continue
             }
@@ -1430,6 +1374,17 @@ class SceneRenderer: NSObject, MTKViewDelegate {
 
 }
 
+
+
+// MARK: - Notifications
+extension Notification.Name {
+    static let resetCamera = Notification.Name("ResetCamera")
+    static let zoomIn = Notification.Name("ZoomIn")
+    static let zoomOut = Notification.Name("ZoomOut")
+    static let toggleFullscreen = Notification.Name("ToggleFullscreen")
+    static let openDataEditor = Notification.Name("OpenDataEditor")
+}
+
 // MARK: - Shader Types
 
 struct Vertex {
@@ -1498,7 +1453,7 @@ extension Array {
 
 // MARK: - Capture Comparison Helper
 
-func capturesAreDifferent(_ lhs: MotionCapture?, _ rhs: MotionCapture?) -> Bool {
+func globalCapturesAreDifferent(_ lhs: MotionCapture?, _ rhs: MotionCapture?) -> Bool {
     lhs?.metadata.filename != rhs?.metadata.filename
 }
 
@@ -1509,3 +1464,6 @@ func capturesAreDifferent(_ lhs: MotionCapture?, _ rhs: MotionCapture?) -> Bool 
         .environmentObject(AppState())
         .frame(width: 600, height: 400)
 }
+
+
+// Removed duplicate extension
