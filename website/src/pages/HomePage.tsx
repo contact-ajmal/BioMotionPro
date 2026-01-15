@@ -1,4 +1,3 @@
-import Hero3D from '../components/Hero3D'
 import { motion } from 'framer-motion'
 import { ArrowRight, Zap, Activity, FileCode, Code2, Layers, Download } from 'lucide-react'
 import type { PageType } from '../App'
@@ -38,12 +37,16 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 {/* Gradient Background */}
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-cyan-900/30 via-slate-900 to-slate-900" />
 
-                {/* Grid Pattern */}
-                <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAgTSAwIDIwIEwgNDAgMjAgTSAyMCAwIEwgMjAgNDAgTSAwIDMwIEwgNDAgMzAgTSAzMCAwIEwgMzAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFmMjkzNyIgb3BhY2l0eT0iMC4zIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-40" />
-
-                {/* 3D Scene */}
-                <div className="absolute right-0 top-0 w-full h-full lg:w-3/5 opacity-60 lg:opacity-100">
-                    <Hero3D />
+                {/* Hero Image */}
+                <div className="absolute right-0 top-0 w-full h-full lg:w-3/5 flex items-center justify-center overflow-hidden">
+                    <motion.img
+                        src="/BioMotionPro/hero-skeleton.png"
+                        alt="Biomechanics skeleton visualization"
+                        className="w-full h-full object-contain object-center opacity-70 lg:opacity-90"
+                        initial={{ opacity: 0, scale: 1.1 }}
+                        animate={{ opacity: 0.9, scale: 1 }}
+                        transition={{ duration: 1.2 }}
+                    />
                 </div>
 
                 {/* Content */}
