@@ -144,6 +144,137 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 </div>
             </section>
 
+            {/* Origin Story Section */}
+            <section className="py-24 bg-slate-900 relative overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent" />
+                <div className="container mx-auto px-6 max-w-4xl relative z-10">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
+                            Why I Built <span className="text-cyan-400">BioMotionPro</span>
+                        </h2>
+
+                        <div className="prose prose-lg prose-invert max-w-none">
+                            <div className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-8 md:p-10">
+                                <p className="text-slate-300 text-lg leading-relaxed mb-6">
+                                    As a researcher working with motion capture data, I tried several existing tools like <strong className="text-white">Mokka</strong> and others.
+                                    But I kept running into the same frustrating problems: <span className="text-cyan-400">compatibility issues</span>,
+                                    <span className="text-cyan-400"> outdated dependencies</span>, and software that simply wouldn't run on my MacBook.
+                                </p>
+
+                                <p className="text-slate-300 text-lg leading-relaxed mb-6">
+                                    Many of these tools hadn't been updated in years. Some required legacy libraries that no longer work on modern macOS.
+                                    Others were locked behind expensive licenses. I needed something that <em className="text-slate-200">just worked</em>.
+                                </p>
+
+                                <p className="text-slate-300 text-lg leading-relaxed mb-6">
+                                    So I decided to build it myself—<strong className="text-white">from scratch</strong>.
+                                    BioMotionPro is built with Swift and Metal, taking full advantage of Apple Silicon for blazing-fast performance.
+                                    It's native, modern, and designed to work seamlessly on macOS Ventura and beyond.
+                                </p>
+
+                                <div className="border-t border-slate-700 pt-6 mt-6">
+                                    <p className="text-slate-300 text-lg leading-relaxed">
+                                        <span className="text-2xl mr-2">💡</span>
+                                        I'm making it <strong className="text-cyan-400">completely free</strong> because I believe researchers and clinicians shouldn't have to struggle
+                                        with broken tools or pay thousands for basic functionality.
+                                        If BioMotionPro saves you even a few hours of frustration, it was worth building.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* Community Section */}
+            <section className="py-24 bg-slate-950">
+                <div className="container mx-auto px-6 max-w-5xl">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-center mb-12"
+                    >
+                        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                            Built by the Community, <span className="text-cyan-400">For the Community</span>
+                        </h2>
+                        <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+                            BioMotionPro is 100% open source. Contributions, feedback, and bug reports are always welcome.
+                        </p>
+                    </motion.div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <motion.a
+                            href="https://github.com/contact-ajmal/BioMotionPro"
+                            target="_blank"
+                            rel="noreferrer"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0 }}
+                            className="group p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-cyan-500/30 transition-all text-center"
+                        >
+                            <div className="text-4xl mb-4">⭐</div>
+                            <h3 className="text-lg font-bold text-white mb-2">Star on GitHub</h3>
+                            <p className="text-slate-400 text-sm">Show your support and help others discover the project.</p>
+                        </motion.a>
+
+                        <motion.a
+                            href="https://github.com/contact-ajmal/BioMotionPro/issues"
+                            target="_blank"
+                            rel="noreferrer"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 }}
+                            className="group p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-cyan-500/30 transition-all text-center"
+                        >
+                            <div className="text-4xl mb-4">🐛</div>
+                            <h3 className="text-lg font-bold text-white mb-2">Report Bugs</h3>
+                            <p className="text-slate-400 text-sm">Found an issue? Open a GitHub issue and I'll fix it ASAP.</p>
+                        </motion.a>
+
+                        <motion.a
+                            href="https://github.com/contact-ajmal/BioMotionPro/discussions"
+                            target="_blank"
+                            rel="noreferrer"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
+                            className="group p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-cyan-500/30 transition-all text-center"
+                        >
+                            <div className="text-4xl mb-4">💬</div>
+                            <h3 className="text-lg font-bold text-white mb-2">Join the Discussion</h3>
+                            <p className="text-slate-400 text-sm">Share feedback, request features, or just say hi!</p>
+                        </motion.a>
+                    </div>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.3 }}
+                        className="mt-12 p-8 rounded-2xl bg-gradient-to-r from-cyan-900/30 to-blue-900/30 border border-cyan-500/20 text-center"
+                    >
+                        <p className="text-lg text-slate-200 mb-4">
+                            <strong>Want to contribute code?</strong> PRs are welcome! Whether it's fixing a typo, adding a feature, or improving documentation—every contribution helps.
+                        </p>
+                        <a
+                            href="https://github.com/contact-ajmal/BioMotionPro/pulls"
+                            className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium transition-colors"
+                        >
+                            View open Pull Requests
+                            <ArrowRight className="w-4 h-4" />
+                        </a>
+                    </motion.div>
+                </div>
+            </section>
+
             {/* CTA Section */}
             <section className="py-24 bg-slate-900 relative overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-cyan-900/20 via-transparent to-transparent" />
@@ -154,10 +285,10 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                         viewport={{ once: true }}
                     >
                         <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                            Ready to Upgrade Your Analysis?
+                            Ready to Get Started?
                         </h2>
                         <p className="text-xl text-slate-400 mb-10">
-                            Join biomechanists and researchers using BioMotionPro for gait analysis. It's free, open-source, and built with precision.
+                            Download BioMotionPro today. It's free, open-source, and built to last.
                         </p>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                             <button
