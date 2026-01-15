@@ -294,11 +294,15 @@ public actor MOTParser: DataParser {
             description: "Imported from MOT/STO"
         )
         
-        // Create a minimal marker data structure (1 frame) since MOT doesn't have markers
+        // Create a minimal marker data structure matching analog frames
+        // This prevents crashes when code expects at least one frame
+        let numFrames = dataRows.count
+        let emptyPositions: [[SIMD3<Float>?]] = Array(repeating: [], count: max(1, numFrames))
+        
         let markers = MarkerData(
             labels: [],
             frameRate: sampleRate,
-            positions: []
+            positions: emptyPositions
         )
         
         return MotionCapture(

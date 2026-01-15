@@ -13,6 +13,8 @@ struct Scene3DView: View {
     
     @Environment(\.openWindow) private var openWindow
     
+    @StateObject private var annotationLayer = AnnotationLayer.shared
+    
     var capture: MotionCapture? = nil // Explicit capture to render (for side-by-side)
     
     var body: some View {
@@ -20,11 +22,25 @@ struct Scene3DView: View {
             // MARK: - Top Toolbar
             topToolbar
             
-            // MARK: - 3D Scene
-            InternalScene3DView(capture: capture)
+            // MARK: - 3D Scene with Annotation Overlay
+            ZStack(alignment: .topTrailing) {
+                InternalScene3DView(capture: capture)
+                
+                // Annotation overlay (for drawing on 3D view)
+                AnnotationOverlayView()
+                    .environmentObject(appState)
+                
+                // Floating Annotation Toolbar (right side)
+                FloatingAnnotationToolbar()
+                    .environmentObject(appState)
+                    .padding(16)
+            }
             
             // MARK: - Bottom Playback
             playbackBar
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .captureSnapshot)) { _ in
+            snapshot()
         }
     }
     
@@ -625,6 +641,12 @@ struct InternalScene3DView: NSViewRepresentable {
         NotificationCenter.default.addObserver(forName: .zoomOut, object: nil, queue: .main) { _ in
             renderer.zoom(delta: -1.0)
         }
+        // Observe skeleton updates from Designer
+        NotificationCenter.default.addObserver(forName: .skeletonUpdated, object: nil, queue: .main) { _ in
+            logDebug("🔔 Received Skeleton Update Notification")
+            // Re-run updateState to pick up the new forced model (FORCE REBUILD)
+            renderer.updateState(renderer.appState, explicitCapture: nil, forceRebuild: true)
+        }
         return renderer
     }
 }
@@ -637,6 +659,30 @@ class InteractiveMetalView: MTKView {
     private var lastMouseLocation: CGPoint = .zero
     private var isRotating = false
     private var isPanning = false
+    
+    func snapshot() -> NSImage? {
+        guard let drawable = currentDrawable else { return nil }
+        let texture = drawable.texture
+        
+        let width = texture.width
+        let height = texture.height
+        let bytesPerPixel = 4
+        let bytesPerRow = bytesPerPixel * width
+        
+        var data = [UInt8](repeating: 0, count: width * height * bytesPerPixel)
+        texture.getBytes(&data, bytesPerRow: bytesPerRow, from: MTLRegionMake2D(0, 0, width, height), mipmapLevel: 0)
+        
+        // Swap RB if needed (Metal is BGRA, CGImage expects RGBA usually, or we specify)
+        // Actually, let's use CIImage for easier conversion
+        let ciImage = CIImage(mtlTexture: texture, options: nil)
+        if let ciImage = ciImage {
+            let rep = NSCIImageRep(ciImage: ciImage)
+            let nsImage = NSImage(size: NSSize(width: CGFloat(width), height: CGFloat(height)))
+            nsImage.addRepresentation(rep)
+            return nsImage
+        }
+        return nil
+    }
     
     override var acceptsFirstResponder: Bool { true }
     
@@ -1023,7 +1069,7 @@ class SceneRenderer: NSObject, MTKViewDelegate {
     var markerSize: Float = 10.0
     
     // State
-    private var appState: AppState
+    var appState: AppState
     private var currentCapture: MotionCapture?
     private var currentFrame: Int = 0
     private var detectedSkeleton: SkeletonModel?
@@ -1045,7 +1091,7 @@ class SceneRenderer: NSObject, MTKViewDelegate {
         setupMetal()
     }
 
-    func updateState(_ appState: AppState, explicitCapture: MotionCapture? = nil) {
+    func updateState(_ appState: AppState, explicitCapture: MotionCapture? = nil, forceRebuild: Bool = false) {
         self.appState = appState
         
         let targetCapture = explicitCapture ?? appState.currentCapture
@@ -1064,7 +1110,14 @@ class SceneRenderer: NSObject, MTKViewDelegate {
                     if let skeleton = detectedSkeleton {
                         logDebug("🦴 Skeleton Auto-Detected: \(skeleton.name) with \(skeleton.bones.count) bones")
                     } else {
-                        logDebug("⚠️ No Skeleton Detected. Markers available: \(capture.markers.labels.count)")
+                        // Fallback: Build skeleton from marker distances
+                        let positions = capture.markers.positions(at: 0)
+                        detectedSkeleton = SkeletonModel.buildFromDistances(
+                            positions: positions,
+                            labels: capture.markers.labels,
+                            maxBoneLength: 600.0  // mm - generous for gait data
+                        )
+                        logDebug("🦴 No model matched. Built distance-based skeleton with \(detectedSkeleton?.bones.count ?? 0) bones")
                     }
                 }
 
@@ -1078,10 +1131,13 @@ class SceneRenderer: NSObject, MTKViewDelegate {
             }
         }
         
-        // Also update if forced model changes dynamically (e.g. from UI)
-        if let forced = appState.forcedSkeletonModel, forced.name != detectedSkeleton?.name {
-            detectedSkeleton = forced
-            logDebug("🦴 Skeleton Model changed to: \(forced.name)")
+        // Always use forced model if available (handles updates from Skeleton Designer)
+        if let forced = appState.forcedSkeletonModel {
+            // FORCE UPDATE if requested or if changed
+            if forceRebuild || detectedSkeleton?.name != forced.name || detectedSkeleton?.bones.count != forced.bones.count {
+                detectedSkeleton = forced
+                logDebug("🦴 Skeleton Model updated: \(forced.name) with \(forced.bones.count) bones")
+            }
         }
                 
 
@@ -1243,15 +1299,29 @@ class SceneRenderer: NSObject, MTKViewDelegate {
         for bone in skeleton.bones {
             if vertexCount + 2 > maxSkeletonVertices { break }
             
-            guard let startIdx = capture.markers.markerIndex(for: bone.startMarker),
-                  let endIdx = capture.markers.markerIndex(for: bone.endMarker) else {
+            // Fuzzy/Robust Marker Lookup
+            let startIdx = capture.markers.markerIndex(for: bone.startMarker) ?? 
+                           capture.markers.labels.firstIndex(where: { 
+                               $0.caseInsensitiveCompare(bone.startMarker) == .orderedSame || 
+                               $0.replacingOccurrences(of: " ", with: "") == bone.startMarker.replacingOccurrences(of: " ", with: "") ||
+                               $0.replacingOccurrences(of: "_", with: "") == bone.startMarker.replacingOccurrences(of: "_", with: "")
+                           })
+            
+            let endIdx = capture.markers.markerIndex(for: bone.endMarker) ?? 
+                         capture.markers.labels.firstIndex(where: { 
+                             $0.caseInsensitiveCompare(bone.endMarker) == .orderedSame || 
+                             $0.replacingOccurrences(of: " ", with: "") == bone.endMarker.replacingOccurrences(of: " ", with: "") ||
+                             $0.replacingOccurrences(of: "_", with: "") == bone.endMarker.replacingOccurrences(of: "_", with: "")
+                         })
+            
+            guard let sIdx = startIdx, let eIdx = endIdx else {
                 missingMarkers.insert(bone.startMarker)
                 missingMarkers.insert(bone.endMarker)
                 continue
             }
             
-            guard let startPos = (startIdx < positions.count ? positions[startIdx] : nil) ?? nil,
-                  let endPos = (endIdx < positions.count ? positions[endIdx] : nil) ?? nil else {
+            guard let startPos = (sIdx < positions.count ? positions[sIdx] : nil) ?? nil,
+                  let endPos = (eIdx < positions.count ? positions[eIdx] : nil) ?? nil else {
                 // Occluded
                 continue
             }
@@ -1269,15 +1339,9 @@ class SceneRenderer: NSObject, MTKViewDelegate {
             validBones += 1
         }
         
-        // Debug Log (Throttle this in production, but helpful now)
-        if frame % 60 == 0 { // Log once per second approx
-             print("🦴 DrawSkeleton: \(skeleton.name) -> Drawn Bones: \(validBones)/\(skeleton.bones.count). Vertices: \(vertexCount)")
-             if !missingMarkers.isEmpty {
-                 let missingList = missingMarkers.subtracting(Set(capture.markers.labels)) // Only show truly missing labels
-                 if !missingList.isEmpty {
-                    print("⚠️ Missing Bone Markers: \(missingList.prefix(5))...")
-                 }
-             }
+        // Debug Log (Throttle this in production)
+        if frame % 300 == 0 { // Log every ~5 seconds
+             logDebug("🦴 DrawSkeleton: \(skeleton.name) -> Drawn Bones: \(validBones)/\(skeleton.bones.count). Vertices: \(vertexCount)")
         }
         
         guard vertexCount > 0 else { return }
@@ -1451,4 +1515,71 @@ func globalCapturesAreDifferent(_ lhs: MotionCapture?, _ rhs: MotionCapture?) ->
 }
 
 
-// Removed duplicate extension
+// MARK: - Snapshot Capture
+
+struct SnapshotHelper: NSViewRepresentable {
+    let callback: (NSView) -> Void
+    
+    func makeNSView(context: Context) -> NSView {
+        let view = NSView()
+        DispatchQueue.main.async {
+            if let window = view.window, let contentView = window.contentView {
+                self.callback(contentView)
+            } else {
+                self.callback(view)
+            }
+        }
+        return view
+    }
+    
+    func updateNSView(_ nsView: NSView, context: Context) {}
+}
+
+extension View {
+    func onSnapshot(trigger: Notification.Name, perform action: @escaping () -> Void) -> some View {
+        self.onReceive(NotificationCenter.default.publisher(for: trigger)) { _ in
+            action()
+        }
+    }
+    
+    @MainActor
+    func snapshot(name: String = "BioMotionPro_Snapshot") {
+        guard let window = NSApp.keyWindow else { return }
+        guard let contentView = window.contentView else { return }
+        
+        let rect = contentView.bounds
+        let bitmapRep = contentView.bitmapImageRepForCachingDisplay(in: rect)!
+        contentView.cacheDisplay(in: rect, to: bitmapRep)
+        
+        guard let data = bitmapRep.representation(using: .png, properties: [:]) else { return }
+        
+        let savePanel = NSSavePanel()
+        savePanel.allowedContentTypes = [.png]
+        savePanel.canCreateDirectories = true
+        savePanel.isExtensionHidden = false
+        savePanel.title = "Save Snapshot"
+        savePanel.message = "Choose a location to save the 3D snapshot"
+        savePanel.nameFieldStringValue = "\(name)_\(ISO8601DateFormatter().string(from: Date()).replacingOccurrences(of: ":", with: "-")).png"
+        
+        savePanel.begin { response in
+            if response == .OK, let url = savePanel.url {
+                do {
+                    try data.write(to: url)
+                    NSSound(named: "Tink")?.play()
+                    
+                    // Show notification
+                    let notification = NSUserNotification()
+                    notification.title = "Snapshot Saved"
+                    notification.informativeText = "Saved to: \(url.lastPathComponent)"
+                    NSUserNotificationCenter.default.deliver(notification)
+                } catch {
+                    let alert = NSAlert()
+                    alert.messageText = "Save Failed"
+                    alert.informativeText = error.localizedDescription
+                    alert.alertStyle = .critical
+                    alert.runModal()
+                }
+            }
+        }
+    }
+}

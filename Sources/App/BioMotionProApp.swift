@@ -3,6 +3,7 @@ import AppKit
 import Combine
 import Foundation
 import Darwin
+import UniformTypeIdentifiers
 
 /// Logs a message to stderr to ensure it appears in system logs/console immediately
 public func logDebug(_ message: String) {
@@ -28,6 +29,7 @@ extension FocusedValues {
 @main
 struct BioMotionProApp: App {
     @StateObject private var appState = AppState()
+    @StateObject private var themeManager = ThemeManager.shared
     
     init() {
         logDebug("🚀 BioMotionPro App Started")
@@ -37,6 +39,7 @@ struct BioMotionProApp: App {
         WindowGroup {
             MainWindow()
                 .environmentObject(appState)
+                .environmentObject(themeManager)
                 .focusedSceneValue(\.appState, appState)
                 .preferredColorScheme(.dark)
         }
@@ -93,7 +96,15 @@ class AppState: ObservableObject {
     @Published var currentCapture: MotionCapture?
     @Published var currentFrame: Int = 0
     @Published var isPlaying: Bool = false
-    @Published var playbackSpeed: Double = 1.0
+    @Published var playbackSpeed: Double = 1.0 {
+        didSet {
+            // Restart timer with new speed if currently playing
+            if isPlaying {
+                stopPlayback()
+                startPlayback()
+            }
+        }
+    }
     @Published var selectedMarkers: Set<String> = []
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
@@ -120,6 +131,10 @@ class AppState: ObservableObject {
         case batchProcessing
         case videoPlayer
         case compareTrials
+        case angleAnalysis
+        case themePicker
+        case markerStyleEditor
+        case annotationTools
         
         var id: String { rawValue }
     }
@@ -233,6 +248,36 @@ class AppState: ObservableObject {
         comparisonCaptures.remove(at: index)
     }
     
+    func runPythonScript() {
+        let panel = NSOpenPanel()
+        panel.allowedContentTypes = [.init(filenameExtension: "py")!]
+        panel.allowsMultipleSelection = false
+        panel.canChooseDirectories = false
+        panel.message = "Select a Python script"
+        panel.prompt = "Run Script"
+        
+        if panel.runModal() == .OK, let url = panel.url, let capture = currentCapture {
+            print("🐍 Running script: \(url.path)")
+            isLoading = true
+            
+            Task {
+                do {
+                    let newCapture = try await PythonRunner.runScript(at: url, with: capture)
+                    await MainActor.run {
+                        self.currentCapture = newCapture
+                        self.isLoading = false
+                        self.showSuccessAlert("Script Execution Successful", "Loaded processed data from script.")
+                    }
+                } catch {
+                    await MainActor.run {
+                        self.isLoading = false
+                        self.showErrorAlert("Script Execution Failed", error.localizedDescription)
+                    }
+                }
+            }
+        }
+    }
+    
     // MARK: - Playback Control
     
     func togglePlayback() {
@@ -323,6 +368,21 @@ class AppState: ObservableObject {
     func deselectAllMarkers() {
         selectedMarkers.removeAll()
     }
+    func showSuccessAlert(_ title: String, _ message: String) {
+        let alert = NSAlert()
+        alert.messageText = title
+        alert.informativeText = message
+        alert.alertStyle = .informational
+        alert.runModal()
+    }
+    
+    func showErrorAlert(_ title: String, _ message: String) {
+        let alert = NSAlert()
+        alert.messageText = title
+        alert.informativeText = message
+        alert.alertStyle = .critical
+        alert.runModal()
+    }
 }
 
 /// Custom menu commands for biomechanics operations
@@ -402,7 +462,7 @@ struct BioMotionCommands: Commands {
                 if appState?.currentCapture == nil {
                     showNoFileLoadedAlert()
                 } else {
-                    appState?.activeSheet = .computeAngle
+                    appState?.activeSheet = .angleAnalysis
                 }
             }
             .keyboardShortcut("j", modifiers: [.command, .shift])
@@ -435,7 +495,11 @@ struct BioMotionCommands: Commands {
             Divider()
             
             Button("Run Python Script...") { 
-                showFeatureNotImplementedAlert("Run Python Script")
+                if appState?.currentCapture == nil {
+                    showNoFileLoadedAlert()
+                } else {
+                    appState?.runPythonScript()
+                }
             }
             .keyboardShortcut("p", modifiers: [.command, .shift])
         }
@@ -466,6 +530,21 @@ struct BioMotionCommands: Commands {
                 print("DEBUG: Toggled showPlots to \(!current)")
             }
             .keyboardShortcut("2", modifiers: .command)
+            
+            Divider()
+            
+            Button("Visual Theme...") {
+                appState?.activeSheet = .themePicker
+            }
+            .keyboardShortcut("t", modifiers: [.command, .shift])
+            
+            Button("Marker Styles...") {
+                appState?.activeSheet = .markerStyleEditor
+            }
+            
+            Button("Annotation Tools") {
+                appState?.activeSheet = .annotationTools
+            }
             
             Button("Show Data Inspector") {
                 let current = UserDefaults.standard.bool(forKey: "showInspector")
@@ -607,6 +686,7 @@ extension Notification.Name {
     static let show3DView = Notification.Name("show3DView")
     static let showSignalPlots = Notification.Name("showSignalPlots")
     static let showInspector = Notification.Name("showInspector")
+    static let skeletonUpdated = Notification.Name("skeletonUpdated")
 }
 
 // MARK: - Alerts
@@ -723,6 +803,38 @@ struct ProcessingSettingsView: View {
     }
 }
 
+// MARK: - Reusable Sheet Header
+
+struct SheetHeader: View {
+    let title: String
+    let icon: String
+    let dismiss: DismissAction
+    
+    var body: some View {
+        HStack(spacing: 12) {
+            Image(systemName: icon)
+                .font(.title2)
+                .foregroundColor(.accentColor)
+            
+            Text(title)
+                .font(.title2.bold())
+            
+            Spacer()
+            
+            Button(action: { dismiss() }) {
+                Image(systemName: "xmark.circle.fill")
+                    .font(.title2)
+                    .foregroundColor(.secondary)
+            }
+            .buttonStyle(.plain)
+            .help("Close")
+        }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 16)
+        .background(Color(NSColor.controlBackgroundColor))
+    }
+}
+
 // MARK: - Analysis Sheets
 
 // MARK: - Joint Angle Computation
@@ -739,56 +851,60 @@ struct ComputeAngleSheet: View {
     @State private var errorMessage: String?
     
     var body: some View {
-        Form {
-            Section("Select Markers") {
-                if let capture = appState.currentCapture {
-                    let markers = capture.markers.labels.sorted()
-                    
-                    Picker("Proximal (Thigh)", selection: $proximalMarker) {
-                        Text("Select...").tag("")
-                        ForEach(markers, id: \.self) { Text($0).tag($0) }
-                    }
-                    
-                    Picker("Center (Knee)", selection: $centerMarker) {
-                        Text("Select...").tag("")
-                        ForEach(markers, id: \.self) { Text($0).tag($0) }
-                    }
-                    
-                    Picker("Distal (Shank)", selection: $distalMarker) {
-                        Text("Select...").tag("")
-                        ForEach(markers, id: \.self) { Text($0).tag($0) }
-                    }
-                }
-            }
+        VStack(spacing: 0) {
+            // Header with close button
+            SheetHeader(title: "Compute Joint Angle", icon: "angle", dismiss: dismiss)
             
-            Section("Output") {
-                TextField("Channel Name", text: $resultName)
-            }
-            
-            if let error = errorMessage {
-                Section {
-                    Text(error)
-                        .foregroundStyle(.red)
-                }
-            }
-            
-            HStack {
-                Button("Cancel", role: .cancel) {
-                    dismiss()
+            Form {
+                Section("Select Markers") {
+                    if let capture = appState.currentCapture {
+                        let markers = capture.markers.labels.sorted()
+                        
+                        Picker("Proximal (Thigh)", selection: $proximalMarker) {
+                            Text("Select...").tag("")
+                            ForEach(markers, id: \.self) { Text($0).tag($0) }
+                        }
+                        
+                        Picker("Center (Knee)", selection: $centerMarker) {
+                            Text("Select...").tag("")
+                            ForEach(markers, id: \.self) { Text($0).tag($0) }
+                        }
+                        
+                        Picker("Distal (Shank)", selection: $distalMarker) {
+                            Text("Select...").tag("")
+                            ForEach(markers, id: \.self) { Text($0).tag($0) }
+                        }
+                    }
                 }
                 
-                Spacer()
-                
-                Button("Compute") {
-                    compute()
+                Section("Output") {
+                    TextField("Channel Name", text: $resultName)
                 }
-                .buttonStyle(.borderedProminent)
-                .disabled(proximalMarker.isEmpty || centerMarker.isEmpty || distalMarker.isEmpty || resultName.isEmpty || isComputing)
+                
+                if let error = errorMessage {
+                    Section {
+                        Text(error)
+                            .foregroundStyle(.red)
+                    }
+                }
+                
+                HStack {
+                    Button("Cancel", role: .cancel) {
+                        dismiss()
+                    }
+                    
+                    Spacer()
+                    
+                    Button("Compute") {
+                        compute()
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .disabled(proximalMarker.isEmpty || centerMarker.isEmpty || distalMarker.isEmpty || resultName.isEmpty || isComputing)
+                }
             }
+            .formStyle(.grouped)
         }
-        .formStyle(.grouped)
-        .frame(minWidth: 400, minHeight: 400)
-        .navigationTitle("Compute Joint Angle")
+        .frame(minWidth: 450, minHeight: 450)
     }
     
     private func compute() {
@@ -883,66 +999,70 @@ struct EMGProcessingSheet: View {
     @State private var errorMessage: String?
     
     var body: some View {
-        Form {
-            Section("Input") {
-                if let capture = appState.currentCapture {
-                    Picker("Source Channel", selection: $selectedChannelID) {
-                        Text("Select...").tag(UUID?.none)
-                        ForEach(capture.analogs.channels) { channel in
-                            Text(channel.label).tag(channel.id as UUID?)
+        VStack(spacing: 0) {
+            // Header with close button
+            SheetHeader(title: "Process EMG Signal", icon: "waveform.path.ecg", dismiss: dismiss)
+            
+            Form {
+                Section("Input") {
+                    if let capture = appState.currentCapture {
+                        Picker("Source Channel", selection: $selectedChannelID) {
+                            Text("Select...").tag(UUID?.none)
+                            ForEach(capture.analogs.channels) { channel in
+                                Text(channel.label).tag(channel.id as UUID?)
+                            }
                         }
                     }
                 }
-            }
-            
-            Section("Filtering") {
-                VStack(alignment: .leading) {
-                    Text("Bandpass Filter: \(Int(bandpassLow)) - \(Int(bandpassHigh)) Hz")
-                    RangeSlider(lower: $bandpassLow, upper: $bandpassHigh, in: 0...1000)
-                }
                 
-                Toggle("Remove Mains Hum (Notch)", isOn: $removeMainsNoise)
-                if removeMainsNoise {
-                    Picker("Mains Frequency", selection: $mainsFreq) {
-                        Text("50 Hz (EU/Asia)").tag(50.0)
-                        Text("60 Hz (US)").tag(60.0)
+                Section("Filtering") {
+                    VStack(alignment: .leading) {
+                        Text("Bandpass Filter: \(Int(bandpassLow)) - \(Int(bandpassHigh)) Hz")
+                        RangeSlider(lower: $bandpassLow, upper: $bandpassHigh, in: 0...1000)
                     }
-                    .pickerStyle(.segmented)
+                    
+                    Toggle("Remove Mains Hum (Notch)", isOn: $removeMainsNoise)
+                    if removeMainsNoise {
+                        Picker("Mains Frequency", selection: $mainsFreq) {
+                            Text("50 Hz (EU/Asia)").tag(50.0)
+                            Text("60 Hz (US)").tag(60.0)
+                        }
+                        .pickerStyle(.segmented)
+                    }
                 }
-            }
-            
-            Section("Processing") {
-                Toggle("Full-Wave Rectification", isOn: $rectify)
                 
-                VStack(alignment: .leading) {
-                    Text("Linear Envelope Cutoff: \(String(format: "%.1f", envelopeCutoff)) Hz")
-                    Slider(value: $envelopeCutoff, in: 1...20, step: 0.5)
+                Section("Processing") {
+                    Toggle("Full-Wave Rectification", isOn: $rectify)
+                    
+                    VStack(alignment: .leading) {
+                        Text("Linear Envelope Cutoff: \(String(format: "%.1f", envelopeCutoff)) Hz")
+                        Slider(value: $envelopeCutoff, in: 1...20, step: 0.5)
+                    }
+                }
+                
+                Section("Output") {
+                    TextField("Suffix (e.g. _Env)", text: $resultSuffix)
+                }
+                
+                if let error = errorMessage {
+                    Section {
+                        Text(error).foregroundStyle(.red)
+                    }
+                }
+                
+                HStack {
+                    Button("Cancel", role: .cancel) { dismiss() }
+                    Spacer()
+                    Button("Process") {
+                        process()
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .disabled(selectedChannelID == nil || isComputing)
                 }
             }
-            
-            Section("Output") {
-                TextField("Suffix (e.g. _Env)", text: $resultSuffix)
-            }
-            
-            if let error = errorMessage {
-                Section {
-                    Text(error).foregroundStyle(.red)
-                }
-            }
-            
-            HStack {
-                Button("Cancel", role: .cancel) { dismiss() }
-                Spacer()
-                Button("Process") {
-                    process()
-                }
-                .buttonStyle(.borderedProminent)
-                .disabled(selectedChannelID == nil || isComputing)
-            }
+            .formStyle(.grouped)
         }
-        .formStyle(.grouped)
-        .frame(minWidth: 450, minHeight: 500)
-        .navigationTitle("Process EMG Signal")
+        .frame(minWidth: 500, minHeight: 550)
     }
     
     private func process() {
@@ -1038,49 +1158,53 @@ struct GaitDetectionSheet: View {
     @State private var detectedCount: Int = 0
     
     var body: some View {
-        Form {
-            Section("Input") {
-                if let capture = appState.currentCapture {
-                    Picker("Vertical Force Channel", selection: $selectedChannelID) {
-                        Text("Select...").tag(UUID?.none)
-                        ForEach(capture.analogs.channels) { channel in
-                            Text(channel.label).tag(channel.id as UUID?)
-                        }
-                    }
-                    Text("Select the vertical Ground Reaction Force (GRF) channel.")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-            }
+        VStack(spacing: 0) {
+            // Header with close button
+            SheetHeader(title: "Detect Gait Events", icon: "figure.walk", dismiss: dismiss)
             
-            Section("Parameters") {
-                VStack(alignment: .leading) {
-                    Text("Force Threshold: \(Int(forceThreshold)) N")
-                    Slider(value: $forceThreshold, in: 5...100, step: 1)
+            Form {
+                Section("Input") {
+                    if let capture = appState.currentCapture {
+                        Picker("Vertical Force Channel", selection: $selectedChannelID) {
+                            Text("Select...").tag(UUID?.none)
+                            ForEach(capture.analogs.channels) { channel in
+                                Text(channel.label).tag(channel.id as UUID?)
+                            }
+                        }
+                        Text("Select the vertical Ground Reaction Force (GRF) channel.")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
                 }
                 
-                Toggle("Clear Existing Events", isOn: $clearExistingEvents)
-            }
-            
-            if let error = errorMessage {
-                Section {
-                    Text(error).foregroundStyle(.red)
+                Section("Parameters") {
+                    VStack(alignment: .leading) {
+                        Text("Force Threshold: \(Int(forceThreshold)) N")
+                        Slider(value: $forceThreshold, in: 5...100, step: 1)
+                    }
+                    
+                    Toggle("Clear Existing Events", isOn: $clearExistingEvents)
+                }
+                
+                if let error = errorMessage {
+                    Section {
+                        Text(error).foregroundStyle(.red)
+                    }
+                }
+                
+                HStack {
+                    Button("Cancel", role: .cancel) { dismiss() }
+                    Spacer()
+                    Button("Detect Events") {
+                        detect()
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .disabled(selectedChannelID == nil || isComputing)
                 }
             }
-            
-            HStack {
-                Button("Cancel", role: .cancel) { dismiss() }
-                Spacer()
-                Button("Detect Events") {
-                    detect()
-                }
-                .buttonStyle(.borderedProminent)
-                .disabled(selectedChannelID == nil || isComputing)
-            }
+            .formStyle(.grouped)
         }
-        .formStyle(.grouped)
-        .frame(minWidth: 400, minHeight: 400)
-        .navigationTitle("Detect Gait Events")
+        .frame(minWidth: 450, minHeight: 450)
     }
     
     private func detect() {

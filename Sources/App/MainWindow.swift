@@ -151,6 +151,14 @@ struct MainWindow: View {
                 VideoPlayerView()
             case .compareTrials:
                 TrialComparisonView()
+            case .angleAnalysis:
+                AngleAnalysisView(appState: appState)
+            case .themePicker:
+                ThemePickerView()
+            case .markerStyleEditor:
+                MarkerStyleEditorView()
+            case .annotationTools:
+                FloatingAnnotationToolbar()
             }
         }
     }
@@ -428,11 +436,34 @@ struct BatchProcessingView: View {
     @State private var processingStatus = "Idle"
     
     var body: some View {
-        VStack(spacing: 20) {
-            Text("Batch Processing")
-                .font(.title)
-                .padding(.top)
+        VStack(spacing: 0) {
+            // Header with close button
+            HStack(spacing: 12) {
+                Image(systemName: "gearshape.2.fill")
+                    .font(.title2)
+                    .foregroundColor(.accentColor)
+                
+                Text("Batch Processing")
+                    .font(.title2.bold())
+                
+                Spacer()
+                
+                Button(action: { dismiss() }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.title2)
+                        .foregroundColor(.secondary)
+                }
+                .buttonStyle(.plain)
+                .help("Close")
+                .disabled(isProcessing)
+            }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 16)
+            .background(Color(NSColor.controlBackgroundColor))
             
+            Divider()
+            
+            VStack(spacing: 20) {
             // File List
             VStack(alignment: .leading) {
                 HStack {
@@ -510,17 +541,9 @@ struct BatchProcessingView: View {
             .background(Color.black.opacity(0.1))
             .cornerRadius(8)
             .padding()
-            
-            HStack {
-                Spacer()
-                Button("Close") {
-                    dismiss()
-                }
-                .disabled(isProcessing)
             }
-            .padding()
         }
-        .frame(width: 600, height: 600)
+        .frame(width: 650, height: 650)
     }
     
     private func addFiles() {

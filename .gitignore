@@ -51,3 +51,6 @@ features/
 *.app/
 *.dmg
 BioMotionPro
+build.log
+test_output.txt
+

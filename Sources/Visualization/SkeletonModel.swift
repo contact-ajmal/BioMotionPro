@@ -18,7 +18,11 @@ public struct SkeletonModel: Sendable {
         let labelSet = Set(labels)
         // Require at least 80% of skeleton markers to be present
         let matchCount = markerLabels.intersection(labelSet).count
-        return Double(matchCount) / Double(markerLabels.count) >= 0.8
+        let percentage = Double(matchCount) / Double(markerLabels.count)
+        print("🔍 isCompatible(\(name)): \(matchCount)/\(markerLabels.count) = \(String(format: "%.0f", percentage * 100))% (need 80%)")
+        print("   Model markers: \(markerLabels.sorted())")
+        print("   File markers: \(labelSet.sorted())")
+        return percentage >= 0.8
     }
     
     /// Build a skeleton dynamically based on marker distances
@@ -343,6 +347,46 @@ extension SkeletonModel {
         ]
     )
     
+    /// Full Body Minimal (16 markers) - for sample/test data
+    /// Markers: LASI, RASI, LPSI, RPSI, LKNE, RKNE, LANK, RANK, LTOE, RTOE, LHEE, RHEE, LSHO, RSHO, LELB, RELB
+    public static let fullBodyMinimal = SkeletonModel(
+        name: "Full Body Minimal",
+        bones: [
+            // Pelvis (box)
+            BoneConnection("LASI", "RASI", part: .pelvis),
+            BoneConnection("LPSI", "RPSI", part: .pelvis),
+            BoneConnection("LASI", "LPSI", part: .pelvis),
+            BoneConnection("RASI", "RPSI", part: .pelvis),
+            
+            // Shoulders
+            BoneConnection("LSHO", "RSHO", part: .spine),
+            
+            // Left Arm
+            BoneConnection("LSHO", "LELB", part: .leftArm),
+            
+            // Right Arm
+            BoneConnection("RSHO", "RELB", part: .rightArm),
+            
+            // Connect shoulders to pelvis (spine approximation)
+            BoneConnection("LSHO", "LASI", part: .spine),
+            BoneConnection("RSHO", "RASI", part: .spine),
+            
+            // Left Leg
+            BoneConnection("LASI", "LKNE", part: .leftLeg),
+            BoneConnection("LKNE", "LANK", part: .leftLeg),
+            BoneConnection("LANK", "LTOE", part: .leftLeg),
+            BoneConnection("LANK", "LHEE", part: .leftLeg),
+            BoneConnection("LHEE", "LTOE", part: .leftLeg),
+            
+            // Right Leg
+            BoneConnection("RASI", "RKNE", part: .rightLeg),
+            BoneConnection("RKNE", "RANK", part: .rightLeg),
+            BoneConnection("RANK", "RTOE", part: .rightLeg),
+            BoneConnection("RANK", "RHEE", part: .rightLeg),
+            BoneConnection("RHEE", "RTOE", part: .rightLeg),
+        ]
+    )
+    
     /// Pitching 29-Marker Set (Vicon/ASMI style)
     public static let pitching29 = SkeletonModel(
         name: "Pitching (29 Markers)",
@@ -434,7 +478,7 @@ extension SkeletonModel {
     /// Try to auto-detect the best skeleton model for given markers
     public static func autoDetect(from labels: [String]) -> SkeletonModel? {
         // Updated search order to prioritize specific sports models
-        let models: [SkeletonModel] = [.plugInGait, .helenHayes, .pitching29, .lowerBody]
+        let models: [SkeletonModel] = [.plugInGait, .helenHayes, .pitching29, .fullBodyMinimal, .lowerBody]
         
         // Return the first compatible model (ordered by completeness)
         for model in models {

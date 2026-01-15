@@ -246,6 +246,10 @@ struct SkeletonDesignerView: View {
         let config = buildConfiguration()
         let model = SkeletonModel.createFromConfiguration(config)
         appState.forcedSkeletonModel = model
+        NotificationCenter.default.post(name: .skeletonUpdated, object: nil)
+        
+        // Show confirmation (Optional: use a toast or status bar message instead of modal)
+        // For now, we'll just print to console as feedback is visible in 3D view
         print("✅ Applied skeleton: \(model.name) with \(model.bones.count) bones")
     }
     
