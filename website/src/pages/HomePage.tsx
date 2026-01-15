@@ -40,7 +40,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 {/* Hero Image */}
                 <div className="absolute right-0 top-0 w-full h-full lg:w-3/5 flex items-center justify-center overflow-hidden">
                     <motion.img
-                        src="/BioMotionPro/hero-skeleton.png"
+                        src="/hero-skeleton.png"
                         alt="Biomechanics skeleton visualization"
                         className="w-full h-full object-contain object-center opacity-70 lg:opacity-90"
                         initial={{ opacity: 0, scale: 1.1 }}
