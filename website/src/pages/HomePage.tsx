@@ -144,6 +144,37 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 </div>
             </section>
 
+            {/* Demo Video Section */}
+            <section className="py-24 bg-slate-950 border-t border-slate-900">
+                <div className="container mx-auto px-6 max-w-6xl">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-center mb-12"
+                    >
+                        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                            See <span className="text-cyan-400">BioMotionPro</span> in Action
+                        </h2>
+                        <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+                            Watch how easy it is to visualize, analyze, and compare motion capture data on macOS.
+                        </p>
+                    </motion.div>
+
+                    <div className="relative aspect-video rounded-2xl overflow-hidden bg-slate-800 border border-slate-700 shadow-2xl shadow-cyan-900/20 group">
+                        <video
+                            className="w-full h-full object-cover"
+                            controls
+                            playsInline
+                            poster="/hero-skeleton.png"
+                        >
+                            <source src="/demo.mp4" type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </section>
+
             {/* Origin Story Section */}
             <section className="py-24 bg-slate-900 relative overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent" />
