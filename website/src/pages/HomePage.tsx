@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, Zap, Activity, FileCode, Code2, Layers, Download } from 'lucide-react'
 import type { PageType } from '../App'
 
@@ -28,6 +29,78 @@ const highlights = [
         description: 'Extend with custom Python scripts for advanced analysis workflows.',
     },
 ]
+
+const screenshots = [
+    {
+        id: 'main',
+        title: 'Main Interface',
+        src: '/screenshots/main-interface.png',
+        description: 'Intuitive 3D workspace with marker list and playback controls.'
+    },
+    {
+        id: 'kinematics',
+        title: 'Kinematics',
+        src: '/screenshots/kinematics.png',
+        description: 'Real-time joint angle calculations and statistics.'
+    },
+    {
+        id: 'emg',
+        title: 'Signal Processing',
+        src: '/screenshots/emg.png',
+        description: 'Advanced filtering (Bandpass, Notch) and rectification tools.'
+    },
+    {
+        id: 'gait',
+        title: 'Gait Events',
+        src: '/screenshots/gait-events.png',
+        description: 'Automated event detection based on force thresholds.'
+    }
+]
+
+function ScreenshotGallery() {
+    const [activeTab, setActiveTab] = useState(0)
+
+    return (
+        <div className="flex flex-col gap-8">
+            {/* Tabs */}
+            <div className="flex flex-wrap justify-center gap-2 md:gap-4">
+                {screenshots.map((shot, index) => (
+                    <button
+                        key={shot.id}
+                        onClick={() => setActiveTab(index)}
+                        className={`px-4 py-2 md:px-6 md:py-3 rounded-full text-sm md:text-base font-medium transition-all ${activeTab === index
+                            ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/50'
+                            : 'bg-slate-800 text-slate-400 border border-slate-700 hover:bg-slate-700 hover:text-white'
+                            }`}
+                    >
+                        {shot.title}
+                    </button>
+                ))}
+            </div>
+
+            {/* Display */}
+            <div className="relative aspect-[16/10] bg-slate-900 rounded-xl border border-slate-800 shadow-2xl shadow-black/50 overflow-hidden group">
+                <AnimatePresence mode="wait">
+                    <motion.img
+                        key={activeTab}
+                        src={screenshots[activeTab].src}
+                        alt={screenshots[activeTab].title}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.3 }}
+                        className="w-full h-full object-contain"
+                    />
+                </AnimatePresence>
+
+                {/* Caption Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950/90 to-transparent p-6 pt-20">
+                    <p className="text-white font-medium text-lg">{screenshots[activeTab].description}</p>
+                </div>
+            </div>
+        </div>
+    )
+}
 
 export default function HomePage({ onNavigate }: HomePageProps) {
     return (
@@ -144,7 +217,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 </div>
             </section>
 
-            {/* Demo Video Section */}
+            {/* Screenshot Gallery Section */}
             <section className="py-24 bg-slate-950 border-t border-slate-900">
                 <div className="container mx-auto px-6 max-w-6xl">
                     <motion.div
@@ -154,24 +227,14 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                         className="text-center mb-12"
                     >
                         <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                            See <span className="text-cyan-400">BioMotionPro</span> in Action
+                            Look Inside <span className="text-cyan-400">BioMotionPro</span>
                         </h2>
                         <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-                            Watch how easy it is to visualize, analyze, and compare motion capture data on macOS.
+                            Clean, dark-themed interface designed for focus and precision.
                         </p>
                     </motion.div>
 
-                    <div className="relative aspect-video rounded-2xl overflow-hidden bg-slate-800 border border-slate-700 shadow-2xl shadow-cyan-900/20 group">
-                        <video
-                            className="w-full h-full object-cover"
-                            controls
-                            playsInline
-                            poster="/hero-skeleton.png"
-                        >
-                            <source src="/demo.mp4" type="video/mp4" />
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
+                    <ScreenshotGallery />
                 </div>
             </section>
 
